@@ -122,13 +122,13 @@ st.markdown("""
 <style>
 
 	.stTabs [data-baseweb="tab-list"] {
-		gap: 4px;
+		gap: 20px;
     }
 
 
 	.stTabs [data-baseweb="tab"] {
 		height: 40px;
-		border-radius: 4px 4px 4px 4px;
+		border-radius: 4px;
 		gap: 20px;
 		padding-top: 20px;
 		padding-bottom: 20px;
