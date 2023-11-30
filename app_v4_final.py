@@ -122,7 +122,7 @@ st.markdown(custom_css, unsafe_allow_html=True)
 rounded_tabs_css = """
 <style>
     /* Target the tab buttons */
-    .st.tabs {
+    .stTabs > div > button {
         border-radius: 20px !important; /* Adjust the border-radius as needed */
         margin-right: 10px; /* Optional: Adjust the space between tabs */
     }
