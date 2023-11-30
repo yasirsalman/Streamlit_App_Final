@@ -1918,14 +1918,33 @@ with tab3:
 
     )
     # Filter the DataFrame and GeoDataFrame based on selected communities
-    filtered_df = df[df['COMM_NAME'].isin(selected_communities)]
+    @st.cache_data
+    def filter_data(df, selected_communities):
+        return df[df['COMM_NAME'].isin(selected_communities)]
+
+    filtered_df = filter_data(df, selected_communities)
+
+    # filtered_df = df[df['COMM_NAME'].isin(selected_communities)]
     gdf['is_selected'] = gdf['NAME'].isin(selected_communities)
 
     # Create the Plotly plot for the selected communities
-    fig = px.line(filtered_df, x='ROLL_YEAR', y='ASSESSED_VALUE', color='COMM_NAME',
-                  labels={'ROLL_YEAR': 'Year', 'ASSESSED_VALUE': 'Average Assessed Value', 'COMM_NAME': 'Community'},
-                  title='Average Assessed Value per Community Over Years')
-    fig.update_layout(title_text="Assessed Value", title_x=0.3, width=800, height=600)
+
+    @st.cache_data
+    def create_plot(filtered_df):
+        # Generate the plot based on filtered_df
+        fig = px.line(filtered_df, x='ROLL_YEAR', y='ASSESSED_VALUE', color='COMM_NAME',
+                labels={'ROLL_YEAR': 'Year', 'ASSESSED_VALUE': 'Average Assessed Value', 'COMM_NAME': 'Community'},
+                title='Average Assessed Value per Community Over Years')
+        fig.update_layout(title_text="Assessed Value", title_x=0.3, width=800, height=600)
+
+        return fig
+
+    fig = create_plot(filtered_df)
+
+    # fig = px.line(filtered_df, x='ROLL_YEAR', y='ASSESSED_VALUE', color='COMM_NAME',
+    #               labels={'ROLL_YEAR': 'Year', 'ASSESSED_VALUE': 'Average Assessed Value', 'COMM_NAME': 'Community'},
+    #               title='Average Assessed Value per Community Over Years')
+    # fig.update_layout(title_text="Assessed Value", title_x=0.3, width=800, height=600)
 
     # st.plotly_chart(fig)
     fig1 = px.choropleth_mapbox(gdf, geojson=gdf.geometry.__geo_interface__,
