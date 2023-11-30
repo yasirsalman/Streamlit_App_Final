@@ -1884,7 +1884,7 @@ with tab3:
                                 mapbox_style="stamen-toner",
                                 zoom=9,
                                 hover_name='NAME',
-                                color_discrete_map={True: "yellow", False: "gray"})
+                                color_discrete_map={True: "yellow", False: "lightgray"})
     fig1.update_layout(title_text="Community Map", title_x=0.3, width=800, height=600)
 
     # Create columns for side by side layout
