@@ -2044,7 +2044,7 @@ with tab4:
         st.write(f"Estimated Home Price from Financial Fit Finder: ${estimated_home_price_tab4:,.2f}")
         # Other operations using estimated_home_price_tab4
     else:
-        st.write("Estimated home price is not calculated yet. Please go to Tab 1.")
+        st.write("Estimated home price is not calculated yet. Please go to Financial Fit Finder.")
         estimated_home_price_tab4 = 500000
         # price_predict = estimated_home_price_tab4
 
