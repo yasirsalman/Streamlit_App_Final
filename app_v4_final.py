@@ -2046,7 +2046,7 @@ with tab4:
     else:
         st.write("Estimated home price is not calculated yet. Please go to Tab 1.")
         estimated_home_price_tab4 = 500000
-        price_predict = estimated_home_price_tab4
+        # price_predict = estimated_home_price_tab4
 
 
     def create_map(comms, comms_sub):
