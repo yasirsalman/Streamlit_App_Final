@@ -938,6 +938,7 @@ with tab2:
 <style>
     .custom-text {{
         font-size: 25px;  /* Font size for the entire paragraph */
+        color: #FFFDE7;
     }}
 </style>
 <p class='custom-text'>Select a Plot from the dropdown below: </p>
