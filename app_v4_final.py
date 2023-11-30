@@ -944,7 +944,6 @@ with tab2:
 """, unsafe_allow_html=True)
 
             plot_option = st.selectbox(
-                'Select a plot to view',
                 ('Buying vs Renting Net Worth', 'Home Value and Mortgage Balance', 'Annual Housing Expense Comparison',
                  'Annual Housing Expense - Buying', 'Annual Housing Expense - Renting', 'Tables - Calculated Results')
             )
