@@ -2266,7 +2266,7 @@ with tab4:
             return m2
 
 
-    properties = pd.read_csv('Calgary Property Data.csv')
+    properties = pd.read_parquet('Calgary Property Data.parquet')
     properties = properties.rename(columns={'COMM_NAME': 'COMMUNITY_NAME'})
     communities = gpd.read_file(
         'geo_export_439b7cc6-4dd0-4905-af0d-7c9d5901f392.shp')
