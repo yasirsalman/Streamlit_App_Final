@@ -939,7 +939,7 @@ with tab2:
                 .custom-text2 {{
                     font-size: 25px;  /* Font size for the entire paragraph */
                     color: yellow;
-                    margin-bottom: 0px;  /* Reduce bottom margin */
+                    margin-bottom: -10px;  /* Reduce bottom margin */
                 }}
                 .selectbox-label {{
                     margin-top: -10px;  /* Reduce top margin */
