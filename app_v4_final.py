@@ -1977,9 +1977,9 @@ with tab3:
     # CPI Variables
     # fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Total_CPI'], name='Total_CPI'), row=2, col=2)
     # fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Total_CPI_seasonally_adjusted'], name='Total_CPI_seasonally_adjusted'), row=2, col=2)
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['CPI_trim'], name='CPI_trim'), row=1, col=2)
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['CPI_median'], name='CPI_median'), row=1, col=2)
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['CPI_common'], name='CPI_common'), row=1, col=2)
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['CPI_trim'], name='Consumer Price Index - Trim'), row=1, col=2)
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['CPI_median'], name='Consumer Price Index - Median'), row=1, col=2)
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['CPI_common'], name='Consumer Price Index - Common'), row=1, col=2)
 
     # Population
     # fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Population'], name='Population'), row=3, col=1, secondary_y=False)
@@ -1990,18 +1990,18 @@ with tab3:
     # fig3.update_yaxes(title_text="Net migration", secondary_y=True, row=3, col=1)
 
     # Construction WTI
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['housing_starts'], name='Housing Starts'), row=3, col=2,
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['housing_starts'], name='New Property Developments'), row=3, col=2,
                    secondary_y=False)
     # 'WTI' on the secondary y-axis
     fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['WTI'], name='WTI'), row=3, col=2, secondary_y=True)
     # Update y-axis titles
-    fig3.update_yaxes(title_text="Housing Starts", secondary_y=False, row=3, col=2)
+    fig3.update_yaxes(title_text="New Property Developments", secondary_y=False, row=3, col=2)
     fig3.update_yaxes(title_text="WTI", secondary_y=True, row=3, col=2)
 
     # House price and mortagge rate
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Home_Prices_Calgary'], name='Home Prices Calgary'), row=3,
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Home_Prices_Calgary'], name='Average House Prices - Calgary'), row=3,
                    col=1, secondary_y=False)
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['5_year_mortgage_rate'], name='5 year mortgage rate'),
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['5_year_mortgage_rate'], name='5-year Mortgage Rate'),
                    row=3, col=1, secondary_y=True)
     # Update y-axis titles
     fig3.update_yaxes(title_text="Home_Prices_Calgary", secondary_y=False, row=3, col=1)
