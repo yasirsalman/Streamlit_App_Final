@@ -942,7 +942,7 @@ with tab2:
                     margin-bottom: 0px;  /* Reduce bottom margin */
                 }}
                 .selectbox-label {{
-                    margin-top: 0px;  /* Reduce top margin */
+                    margin-top: -10px;  /* Reduce top margin */
                 }}
             </style>
             <p class='custom-text2'>Select a Plot from the dropdown below: </p>
