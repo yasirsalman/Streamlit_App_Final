@@ -118,6 +118,20 @@ custom_css = """
 # Inject the CSS into Streamlit
 st.markdown(custom_css, unsafe_allow_html=True)
 
+# Custom CSS for rounded tabs
+rounded_tabs_css = """
+<style>
+    /* Target the tab buttons */
+    .st.tabs {
+        border-radius: 20px !important; /* Adjust the border-radius as needed */
+        margin-right: 10px; /* Optional: Adjust the space between tabs */
+    }
+</style>
+"""
+
+# Inject the CSS into the app
+st.markdown(rounded_tabs_css, unsafe_allow_html=True)
+
 # Create tabs
 tab1, tab2, tab3, tab4 = st.tabs(
     ["Financial Fit Finder", "Buy vs. Rent Pathfinder", "Market Value Explorer", "Budget-Friendly Finds"])
