@@ -938,14 +938,13 @@ with tab2:
             <style>
                 .custom-text2 {{
                     font-size: 25px;  /* Font size for the entire paragraph */
-                    color: yellow;
-                    margin-bottom: -10px;  /* Reduce bottom margin */
+                    color: #FFFDE7;
                 }}
-                .selectbox-label {{
-                    margin-top: -10px;  /* Reduce top margin */
+                .streamlit-selectbox {{
+                    margin-top: -20px;  /* Adjust this value as needed */
                 }}
             </style>
-            <p class='custom-text2'>Select a Plot from the dropdown below: </p>
+            <div class='custom-text2'>Select a Plot from the dropdown below:</div>
             """, unsafe_allow_html=True)
 
             plot_option = st.selectbox(
