@@ -127,11 +127,11 @@ st.markdown("""
 
 
 	.stTabs [data-baseweb="tab"] {
-		height: 30px;
+		height: 40px;
 		border-radius: 4px 4px 4px 4px;
 		gap: 20px;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding-top: 20px;
+		padding-bottom: 20px;
     }
 
 	.stTabs [aria-selected="true"] {
