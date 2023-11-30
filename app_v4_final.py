@@ -797,7 +797,7 @@ with tab2:
         with col2:
             st.markdown("### Rental Scenario Assumptions")
             # st.header("Rental Scenario Assumptions")
-            st.write("\n")
+            # st.write("\n")
 
             monthly_rent_payment = st.number_input("Monthly Rent Payment ($ per month)", min_value=0.0, value=2000.0,
                                                    help="Enter your monthly rent payment.")
