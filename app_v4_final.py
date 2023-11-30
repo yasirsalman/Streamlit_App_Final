@@ -934,6 +934,15 @@ with tab2:
                     # Optionally, display the difference per year
                     # st.write(f"Year {year} Difference: ${difference:,.2f}")
 
+            st.markdown(f"""
+<style>
+    .custom-text {{
+        font-size: 25px;  /* Font size for the entire paragraph */
+    }}
+</style>
+<p class='custom-text'>Select a Plot from the dropdown below: </p>
+""", unsafe_allow_html=True)
+
             plot_option = st.selectbox(
                 'Select a plot to view',
                 ('Buying vs Renting Net Worth', 'Home Value and Mortgage Balance', 'Annual Housing Expense Comparison',
