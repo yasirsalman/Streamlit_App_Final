@@ -1893,10 +1893,21 @@ with tab3:
     st.write(" ")
 
     # import data
-    df = pd.read_pickle('Grouped_Data_ALL-Years.pkl')
-    se_df = pd.read_csv('merged_df_property_prices.csv')
-    gdf = gpd.read_file('gdf_comm_districts.geojson')
-    gdf_projected = gdf.to_crs(epsg=32612)  # corresponds to UTM Zone 12N
+    @st.cache_data
+    def load_data():
+        df = pd.read_pickle('Grouped_Data_ALL-Years.pkl')
+        se_df = pd.read_csv('merged_df_property_prices.csv')
+        gdf = gpd.read_file('gdf_comm_districts.geojson')
+        gdf_projected = gdf.to_crs(epsg=32612)  # corresponds to UTM Zone 12N
+        return df, se_df, gdf, gdf_projected
+
+    df, se_df, gdf, gdf_projected = load_data()
+
+
+    # df = pd.read_pickle('Grouped_Data_ALL-Years.pkl')
+    # se_df = pd.read_csv('merged_df_property_prices.csv')
+    # gdf = gpd.read_file('gdf_comm_districts.geojson')
+    # gdf_projected = gdf.to_crs(epsg=32612)  # corresponds to UTM Zone 12N
 
     # Streamlit widget for multi-selection
     selected_communities = st.multiselect(
