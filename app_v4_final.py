@@ -936,12 +936,12 @@ with tab2:
 
             st.markdown(f"""
 <style>
-    .custom-text {{
+    .custom-text2 {{
         font-size: 25px;  /* Font size for the entire paragraph */
         color: blue;
     }}
 </style>
-<p class='custom-text'>Select a Plot from the dropdown below: </p>
+<p class='custom-text2'>Select a Plot from the dropdown below: </p>
 """, unsafe_allow_html=True)
 
             plot_option = st.selectbox(
