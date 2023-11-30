@@ -1896,7 +1896,8 @@ with tab3:
     @st.cache_data
     def load_data():
         df = pd.read_pickle('Grouped_Data_ALL-Years.pkl')
-        se_df = pd.read_csv('merged_df_property_prices.csv')
+        # se_df = pd.read_csv('merged_df_property_prices.csv')
+        se_df = pd.read_pickle('merged_df_property_prices.pkl')
         gdf = gpd.read_file('gdf_comm_districts.geojson')
         gdf_projected = gdf.to_crs(epsg=32612)  # corresponds to UTM Zone 12N
         return df, se_df, gdf, gdf_projected
@@ -2266,7 +2267,7 @@ with tab4:
             return m2
 
 
-    properties = pd.read_parquet('Calgary Property Data.parquet')
+    properties = pd.read_pickle('Calgary Property Data.pkl')
     properties = properties.rename(columns={'COMM_NAME': 'COMMUNITY_NAME'})
     communities = gpd.read_file(
         'geo_export_439b7cc6-4dd0-4905-af0d-7c9d5901f392.shp')
