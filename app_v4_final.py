@@ -125,6 +125,7 @@ st.markdown("""
 		gap: 2px;
     }
 
+
 	.stTabs [data-baseweb="tab"] {
 		height: 30px;
 		border-radius: 4px 4px 0px 0px;
