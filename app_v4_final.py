@@ -127,7 +127,7 @@ st.markdown("""
 
     /* Style individual tabs */
     .stTabs [data-baseweb="tab"] {
-        height: 30px; /* Increase height of the tab */
+        height: 25px; /* Increase height of the tab */
         border-radius: 10px; /* More pronounced rounded corners */
         padding-top: 25px; /* Increase padding at the top */
         padding-bottom: 25px; /* Increase padding at the bottom */
