@@ -120,24 +120,26 @@ st.markdown(custom_css, unsafe_allow_html=True)
 
 st.markdown("""
 <style>
-
-	.stTabs [data-baseweb="tab-list"] {
-		gap: 20px;
+    /* Target the container of the tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 20px; /* Space between tabs */
     }
 
-
-	.stTabs [data-baseweb="tab"] {
-		height: 40px;
-		border-radius: 4px;
-		gap: 20px;
-		padding-top: 20px;
-		padding-bottom: 20px;
+    /* Style individual tabs */
+    .stTabs [data-baseweb="tab"] {
+        height: 60px; /* Increase height of the tab */
+        border-radius: 10px; /* More pronounced rounded corners */
+        padding-top: 25px; /* Increase padding at the top */
+        padding-bottom: 25px; /* Increase padding at the bottom */
+        padding-left: 10px; /* Optional: Add padding on the left */
+        padding-right: 10px; /* Optional: Add padding on the right */
+        font-size: 18px; /* Optional: Increase font size */
     }
 
-	.stTabs [aria-selected="true"] {
-  		background-color: #FFFFFF;
-	}
-
+    /* Style for the selected (active) tab */
+    .stTabs [aria-selected="true"] {
+        background-color: #FFFFFF; /* Background color for the active tab */
+    }
 </style>""", unsafe_allow_html=True)
 
 # Create tabs
