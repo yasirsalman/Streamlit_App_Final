@@ -2050,12 +2050,12 @@ with tab4:
 
 
     def create_map(comms, comms_sub):
-        x_map = comms.centroid.x.mean()
-        y_map = comms.centroid.y.mean()
+        # x_map = comms.centroid.x.mean()
+        # y_map = comms.centroid.y.mean()
         colormap = cm.linear.YlGnBu_09.to_step(data=comms_sub['COMM_SLT'], method='quant',
                                                quantiles=[0, 0.1, 0.75, 0.9, 0.98, 1])
 
-        m = folium.Map(location=[y_map, x_map], zoom_start=10, tiles=None)
+        m = folium.Map(location=[51.049999, -114.066666], zoom_start=10, tiles=None)
         folium.TileLayer('CartoDB positron', name="Light Map", control=False).add_to(m)
         colormap.caption = "# of Affordable Residental Properties in Calgary Communities"
         style_function = lambda x: {"weight": 0.5,
