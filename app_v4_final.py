@@ -2041,10 +2041,10 @@ with tab4:
         estimated_home_price_tab4 = st.session_state['estimated_home_price']
 
         # Now you can use this variable as needed
-        st.write(f"Estimated Home Price from Financial Fit Finder: ${estimated_home_price_tab4:,.2f}")
+        st.write(f"Estimated Home Price from Financial Fit Finder Tab: ${estimated_home_price_tab4:,.2f}")
         # Other operations using estimated_home_price_tab4
     else:
-        st.write("Estimated home price is not calculated yet. Please go to Financial Fit Finder.")
+        st.write("Estimated home price is not calculated yet. Please go to Financial Fit Finder Tab.")
         estimated_home_price_tab4 = 500000
         # price_predict = estimated_home_price_tab4
 
