@@ -138,13 +138,15 @@ st.markdown("""
 
     /* Style for the selected (active) tab */
     .stTabs [aria-selected="true"] {
-        background-color: #FFFFFF; /* Background color for the active tab */
+        background-color: #FF9100; /* Change to your preferred color */
+        color: #FFFFFF; /* Optional: Change text color if needed */
     }
 </style>""", unsafe_allow_html=True)
 
+
 # Create tabs
 tab1, tab2, tab3, tab4 = st.tabs(
-    [" Financial Fit Finder ", " Buy vs. Rent Pathfinder ", " Market Value Explorer ", " Budget-Friendly Finds "])
+    ["Financial Fit Finder", "Buy vs. Rent Pathfinder", "Market Value Explorer", "Budget-Friendly Finds"])
 
 # Content for Tab 1
 with tab1:
