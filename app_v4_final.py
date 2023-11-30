@@ -1934,8 +1934,8 @@ with tab3:
     fig3 = make_subplots(rows=3, cols=2, specs=[[{'secondary_y': True}, {'secondary_y': True}],
                                                 [{'secondary_y': True}, {'secondary_y': True}],
                                                 [{'secondary_y': True}, {'secondary_y': True}], ],
-                         subplot_titles=['Employment and Unemployment', 'Consumer Price Index', 'BCPI', 'Net migration',
-                                         'Construction and WTI', '5 year Mortgage rate vs house price'])
+                         subplot_titles=['Employment and Unemployment', 'Consumer Price Index', 'Building Construction Price Index', 'Net Migration',
+                                         '5 year Mortgage rate vs Average House Price', 'New Property Developments and WTI'])
 
     # Employment and Unemployment
     fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Employment'], name='Employment'), row=1, col=1,
@@ -1957,21 +1957,21 @@ with tab3:
     # fig3.update_yaxes(title_text="Unemployment rate", secondary_y=True, row=1, col=2)
 
     # BCPI Variables
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Total'], name='Annual_BCPI_Total'), row=2,
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Total'], name='Annual BCPI Total'), row=2,
                    col=1)
     fig3.add_trace(
-        go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Excluding_Energy'], name='Annual_BCPI_Excluding_Energy'),
+        go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Excluding_Energy'], name='Annual BCPI Excluding Energy'),
         row=2, col=1)
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Energy'], name='Annual_BCPI_Energy'), row=2,
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Energy'], name='Annual BCPI Energy'), row=2,
                    col=1)
     fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Metals_and_Minerals'],
                               name='Annual_BCPI_Metals_and_Minerals'), row=2, col=1)
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Forestry'], name='Annual_BCPI_Forestry'),
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Forestry'], name='Annual BCPI Forestry'),
                    row=2, col=1)
     fig3.add_trace(
-        go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Agriculture'], name='Annual_BCPI_Agriculture'), row=2,
+        go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Agriculture'], name='Annual BCPI Agriculture'), row=2,
         col=1)
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Fish'], name='Annual_BCPI_Fish'), row=2,
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Annual_BCPI_Fish'], name='Annual BCPI Fish'), row=2,
                    col=1)
 
     # CPI Variables
@@ -1983,7 +1983,7 @@ with tab3:
 
     # Population
     # fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Population'], name='Population'), row=3, col=1, secondary_y=False)
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['net_migration'], name='Net_migration'), row=2, col=2,
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['net_migration'], name='Net Migration'), row=2, col=2,
                    secondary_y=False)
     # Update y-axis titles
     # fig3.update_yaxes(title_text="Population", secondary_y=False, row=3, col=1)
@@ -1999,9 +1999,9 @@ with tab3:
     fig3.update_yaxes(title_text="WTI", secondary_y=True, row=3, col=2)
 
     # House price and mortagge rate
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Home_Prices_Calgary'], name='Home_Prices_Calgary'), row=3,
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['Home_Prices_Calgary'], name='Home Prices Calgary'), row=3,
                    col=1, secondary_y=False)
-    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['5_year_mortgage_rate'], name='5_year_mortgage_rate'),
+    fig3.add_trace(go.Scatter(x=se_df['year_month'], y=se_df['5_year_mortgage_rate'], name='5 year mortgage rate'),
                    row=3, col=1, secondary_y=True)
     # Update y-axis titles
     fig3.update_yaxes(title_text="Home_Prices_Calgary", secondary_y=False, row=3, col=1)
