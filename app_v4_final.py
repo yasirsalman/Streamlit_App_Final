@@ -2266,11 +2266,20 @@ with tab4:
             return m2
 
 
-    properties = pd.read_csv('Calgary Property Data.csv')
-    properties = properties.rename(columns={'COMM_NAME': 'COMMUNITY_NAME'})
-    communities = gpd.read_file(
-        'geo_export_439b7cc6-4dd0-4905-af0d-7c9d5901f392.shp')
-    communities = communities[['name', 'geometry']].rename(columns={'name': 'COMMUNITY_NAME'})
+    @st.cache_data
+    def load_data():
+        properties = pd.read_csv('Calgary Property Data.csv')
+        communities = gpd.read_file('geo_export_439b7cc6-4dd0-4905-af0d-7c9d5901f392.shp')
+        communities = communities[['name', 'geometry']].rename(columns={'name': 'COMMUNITY_NAME'})
+        return properties, communities
+
+    properties, communities = load_data()
+
+    # properties = pd.read_csv('Calgary Property Data.csv')
+    # properties = properties.rename(columns={'COMM_NAME': 'COMMUNITY_NAME'})
+    # communities = gpd.read_file(
+    #     'geo_export_439b7cc6-4dd0-4905-af0d-7c9d5901f392.shp')
+    # communities = communities[['name', 'geometry']].rename(columns={'name': 'COMMUNITY_NAME'})
 
     col1, col2, col3 = st.columns([2, 4, 2])
 
