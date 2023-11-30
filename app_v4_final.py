@@ -272,12 +272,12 @@ with tab1:
                                        help='Enter your total yearly income before taxes')
         affordability_level = st.select_slider(
             'Affordability Level',
-            options=([round(i * 0.1, 2) for i in range(0, 6)]),
+            options=([round(i * 0.1, 2) for i in range(0, 10)]),
             value=0.30,
             label_visibility="visible",
             help='Select how much of your disposable income is allocated to mortgage payments and monthly debt payments')
         annual_interest_rate = st.number_input('Annual Interest Rate (%)', min_value=0.0, value=4.0, step=0.1)
-        amortization_years = st.number_input('Loan Term in Years', min_value=5, value=30, step=1,
+        amortization_years = st.number_input('Loan Term in Years', min_value=5, value=25, step=1,
                                              help='Amortization is the total time it takes to pay off your mortgage')
         downpayment = st.select_slider(
             'Down Payment',
