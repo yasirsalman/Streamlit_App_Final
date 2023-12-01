@@ -193,6 +193,27 @@ with tab1:
 
 
     def calculate_max_home_price(adjusted_monthly_income, annual_interest_rate, amortization_years, downpayment):
+        """
+        Calculate the estimated maximum home price based on financial parameters.
+
+        This function estimates the maximum home price a person can afford based on their adjusted monthly income,
+        the annual interest rate (considering a stress test rate), the length of the loan (amortization years),
+        and the downpayment percentage.
+
+        Parameters:
+        - adjusted_monthly_income (float): The monthly income available for mortgage payments after deducting other expenses.
+        - annual_interest_rate (float): The annual interest rate for the mortgage.
+        - amortization_years (int): The total duration of the mortgage in years.
+        - downpayment (float): The downpayment percentage of the total home price.
+
+        Returns:
+        - float: The estimated maximum price of a home that can be afforded.
+
+        Note:
+        The function includes a stress test by adding a 2% buffer to the annual interest rate. This buffer is included
+        to assess the ability to maintain mortgage payments under potentially higher future interest rates.
+        """
+
         # Apply stress test if required
 
         # Monthly interest rate. Assuming 2% buffer for the stress rate
