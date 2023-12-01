@@ -1956,7 +1956,7 @@ with tab3:
     custom_css_tab3 = """
         <style>
             /* You can use .st-ck to target the multiselect widget container */
-            .st-ck { 
+            .st-ck {
                 background-color: #00695C; /* Dark background for better contrast */
             }
             /* Use .st-bq to target the multiselect widget options */
@@ -2392,6 +2392,7 @@ with tab4:
                     if user_text_input:
                         df = df[df[column].astype(str).str.contains(user_text_input.upper())]
         return df
+
 
 
     def property_map(mini_df, sub, comms):
