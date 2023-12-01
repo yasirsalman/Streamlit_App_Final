@@ -2295,7 +2295,7 @@ with tab4:
                         margin-top: -10px;  /* Reduce top margin */
                     }}
                 </style>
-                <p class='custom-text2'>Estimated Home Price from Financial Fit Finder Tab: {estimated_home_price_tab4:,.2f}</p>
+                <p class='custom-text2'>Estimated Home Price from Financial Fit Finder Tab: ${estimated_home_price_tab4:,.2f}</p>
                 """, unsafe_allow_html=True)
         # Other operations using estimated_home_price_tab4
     else:
