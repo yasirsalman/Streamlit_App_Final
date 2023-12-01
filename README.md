@@ -12,7 +12,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/your_username_/Calgary-Home-Navigator">
+  <a href="https://github.com/yasirsalman/Streamlit_App_Final/blob/main/logo.PNG">
     <img src="logo.PNG" alt="Logo" width="600" height="400">
   </a>
 
@@ -56,16 +56,16 @@
 
 [product-screenshot]: app_screenshot.PNG
 
-[![Calgary Home Navigator Screen Shot][product-screenshot]](https://example.com)
+[![Calgary Home Navigator Screen Shot][product-screenshot]](https://github.com/yasirsalman/Streamlit_App_Final/blob/main/app_screenshot.PNG)
 
 
 The Calgary Home Navigator is an advanced web application designed for the Calgary real estate market. It aids users in making informed decisions through various analytical tools and interactive maps.
 
 Key Features:
-* House Affordability Calculator
-* Buy vs. Rent Calculator
-* Community Valuation Trends
-* Calgary Custom Affordability Map
+* Finacial Fit Finder
+* Buy vs. Rent Pathfinder
+* Market Value Explorer
+* Budget-Friendly Finds
 
 Use the `README.txt` provided for detailed guidance.
 
@@ -103,6 +103,23 @@ This project uses Python and several Python libraries. Ensure Python 3.8+ is ins
    ```sh
    git clone https://github.com/your_username_/Calgary-Home-Navigator.git
 
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+This section provides instructions on how to set up the Calgary Home Navigator project on your local machine. Follow these steps to get your development environment up and running.
+
+### Prerequisites
+
+This project requires some tools and packages to be installed beforehand. Make sure you have the following prerequisites installed:
+
+* Python
+  ```sh
+  python --version
+
+Ensure you have Python 3.x installed.
+
+Pip
 
 
 
