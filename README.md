@@ -34,9 +34,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -143,6 +140,18 @@ Yemi Dare-Ode - odareode3@gatech.edu
 
 
 Project Link: [https://github.com/yasirsalman/Streamlit_App_Final](https://github.com/yasirsalman/Streamlit_App_Final)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+
+* [CSE6242 Instructor and TAs](https://poloclub.github.io/#cse6242)
+* [MIT License](https://opensource.org/license/mit/)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 ---
