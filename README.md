@@ -55,7 +55,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Calgary Home Navigator Screen Shot][product-screenshot]](https://example.com)
+[![Calgary Home Navigator Screen Shot][app_screenshot.PNG]](https://example.com)
 
 The Calgary Home Navigator is an advanced web application designed for the Calgary real estate market. It aids users in making informed decisions through various analytical tools and interactive maps.
 
