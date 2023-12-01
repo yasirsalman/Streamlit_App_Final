@@ -2054,7 +2054,32 @@ with tab3:
             st.write("No communities selected or community data not available.")
 
     ####################
-    st.markdown('### Social Economic Factors')
+    # ---------------------------
+# Function to categorize variables based on their range
+    def categorize_variables(se_df, selected_variables):
+        variable_categories = {'primary': [], 'secondary': []}
+        ranges = []
+
+        # Calculate the range of each variable
+        for variable in selected_variables:
+            min_val = se_df[variable].min()
+            max_val = se_df[variable].max()
+            var_range = max_val - min_val
+            ranges.append((variable, var_range))
+
+        # Sort variables based on range
+        sorted_ranges = sorted(ranges, key=lambda x: x[1])
+
+        # Split variables into two groups
+        # This is a simple approach - you might need a more sophisticated method based on your data
+        median_index = len(sorted_ranges) // 2
+        for i, (variable, _) in enumerate(sorted_ranges):
+            if i < median_index:
+                variable_categories['primary'].append(variable)
+            else:
+                variable_categories['secondary'].append(variable)
+
+        return variable_categories
 
     # Streamlit widget for multi-selection
     selected_variables = st.multiselect(
@@ -2063,24 +2088,65 @@ with tab3:
         default=se_df.columns[1]  # Default to the first variable
     )
 
-    # Create a Plotly figure
-    fig2 = go.Figure()
+    # Categorize variables
+    variable_categories = categorize_variables(se_df, selected_variables)
 
-    # Add traces for selected variables
-    for variable in selected_variables:
-        fig2.add_trace(go.Scatter(x=se_df['year_month'], y=se_df[variable], name=variable))
+    # Create a Plotly figure
+    fig2 = make_subplots(specs=[[{"secondary_y": True}]])
+
+    # Add traces for primary variables
+    for variable in variable_categories['primary']:
+        fig2.add_trace(go.Scatter(x=se_df['year_month'], y=se_df[variable], name=variable), secondary_y=False)
+
+    # Add traces for secondary variables
+    for variable in variable_categories['secondary']:
+        fig2.add_trace(go.Scatter(x=se_df['year_month'], y=se_df[variable], name=variable), secondary_y=True)
 
     # Update layout
     fig2.update_layout(
         title_text="Selected Variables Over Time",
         xaxis_title="Year-Month",
-        yaxis_title="Value",
         width=1600,  # Width of the figure in pixels
         height=600  # Height of the figure in pixels
     )
 
+    # Update y-axes titles
+    fig2.update_yaxes(title_text="Primary Axis", secondary_y=False)
+    fig2.update_yaxes(title_text="Secondary Axis", secondary_y=True)
+
     # Display the plot in Streamlit
     st.plotly_chart(fig2)
+
+
+
+    # ----------------------
+    # st.markdown('### Social Economic Factors')
+
+    # # Streamlit widget for multi-selection
+    # selected_variables = st.multiselect(
+    #     'Select Factors',
+    #     options=se_df.columns[1:],  # All column names excluding 'year_month'
+    #     default=se_df.columns[1]  # Default to the first variable
+    # )
+
+    # # Create a Plotly figure
+    # fig2 = go.Figure()
+
+    # # Add traces for selected variables
+    # for variable in selected_variables:
+    #     fig2.add_trace(go.Scatter(x=se_df['year_month'], y=se_df[variable], name=variable))
+
+    # # Update layout
+    # fig2.update_layout(
+    #     title_text="Selected Variables Over Time",
+    #     xaxis_title="Year-Month",
+    #     yaxis_title="Value",
+    #     width=1600,  # Width of the figure in pixels
+    #     height=600  # Height of the figure in pixels
+    # )
+
+    # # Display the plot in Streamlit
+    # st.plotly_chart(fig2)
 
     ####################
     # Create a subplot figure
