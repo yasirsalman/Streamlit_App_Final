@@ -234,7 +234,25 @@ with tab1:
 
 
     def calculate_monthly_mortgage(loan_amount, annual_interest_rate, amortization_years):
+        """
+        Calculate the monthly mortgage payment for a given loan amount, interest rate, and loan term.
 
+        This function computes the monthly mortgage payment incorporating a stress test by adding a 2% buffer
+        to the annual interest rate. The function also calculates the total payment over the entire loan period and 
+        the total interest paid over this period.
+
+        Parameters:
+        - loan_amount (float): The total amount of the loan or mortgage.
+        - annual_interest_rate (float): The annual interest rate of the mortgage.
+        - amortization_years (int): The total duration of the mortgage in years.
+
+        Returns:
+        - float: The monthly mortgage payment.
+
+        Note:
+        The function assumes a 2% buffer for the stress test on the interest rate. The total payment and total interest
+        paid calculations are based on the entire duration of the mortgage.
+        """
         # Assuming 2% buffer for the interest rate
         stress_test_rate = annual_interest_rate + 2
         monthly_interest_rate = stress_test_rate / 12 / 100
@@ -252,6 +270,24 @@ with tab1:
 
 
     def calculate_mortgage_insurance(loan_amount, ltv_ratio):
+        """
+    Calculate the mortgage insurance premium based on the loan amount and the loan-to-value (LTV) ratio.
+
+    The insurance premium rate is determined by the LTV ratio. Different LTV ratio ranges are associated with
+    different insurance premium rates.
+
+    Parameters:
+    - loan_amount (float): The total amount of the loan or mortgage.
+    - ltv_ratio (float): The loan-to-value ratio, which is a financial term used by lenders to express the ratio of a loan
+                          to the value of an asset purchased.
+
+    Returns:
+    - float: The calculated mortgage insurance premium.
+
+    Note:
+    The function applies different insurance premium rates based on the LTV ratio thresholds. It returns the calculated
+    insurance premium amount based on the given loan amount and LTV ratio.
+    """
         # Determine the insurance premium rate based on the LTV ratio
         if ltv_ratio <= 0.65:
             insurance_premium_rate = 0.0060  # 0.60%
