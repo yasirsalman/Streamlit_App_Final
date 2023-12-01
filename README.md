@@ -55,7 +55,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[product-screenshot]: app_screenshot.PNG
+[product-screenshot]: images/app_screenshot.PNG
 
 
 
