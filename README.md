@@ -75,14 +75,14 @@ Use the `README.txt` provided for detailed guidance.
 
 This section details the key frameworks, libraries, and tools used in the development of Calgary Home Navigator. These technologies were chosen for their efficiency, ease of use, and ability to create a robust and user-friendly web application.
 
-* ![Streamlit][Streamlit-badge][Streamlit-url]
-* ![Plotly][Plotly-badge]
-* ![Pandas][Pandas-badge]
-* ![GeoPandas][GeoPandas-badge]
-* ![Folium][Folium-badge]
-* ![Numpy][Numpy-badge]
-* ![Matplotlib][Matplotlib-badge]
-* ![Altair][Altair-badge]
+* [![Streamlit][Streamlit-badge]][Streamlit-url]
+* [![Plotly][Plotly-badge]][Plotly-url]
+* [![Pandas][Pandas-badge]][Pandas-url]
+* [![GeoPandas][GeoPandas-badge]][GeoPandas-url]
+* [![Folium][Folium-badge]][Folium-url]
+* [![Numpy][Numpy-badge]][Numpy-url]
+* [![Matplotlib][Matplotlib-badge]][Matplotlib-url]
+* [![Altair][Altair-badge]][Altair-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
