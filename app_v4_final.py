@@ -2286,7 +2286,7 @@ with tab4:
         # st.write(f"Estimated Home Price from Financial Fit Finder Tab: ${estimated_home_price_tab4:,.2f}")
         st.markdown(f"""
                 <style>
-                    .custom-text2 {{
+                    .custom-text3 {{
                         font-size: 18px;  /* Font size for the entire paragraph */
                         color: yellow;
                         margin-bottom: -10px;  /* Reduce bottom margin */
@@ -2301,18 +2301,18 @@ with tab4:
     else:
         # st.write("Estimated home price is not calculated yet. Please go to Financial Fit Finder Tab.")
         st.markdown(f"""
-                        <style>
-                            .custom-text2 {{
-                                font-size: 18px;  /* Font size for the entire paragraph */
-                                color: red;
-                                margin-bottom: -10px;  /* Reduce bottom margin */
-                            }}
-                            .selectbox-label {{
-                                margin-top: -10px;  /* Reduce top margin */
-                            }}
-                        </style>
-                        <p class='custom-text2'>Estimated home price is not calculated yet. Please go to Financial Fit Finder Tab.</p>
-                        """, unsafe_allow_html=True)
+                    <style>
+                        .custom-text4 {{
+                            font-size: 18px;  /* Font size for the entire paragraph */
+                            color: red;
+                            margin-bottom: -10px;  /* Reduce bottom margin */
+                        }}
+                        .selectbox-label {{
+                            margin-top: -10px;  /* Reduce top margin */
+                        }}
+                    </style>
+                    <p class='custom-text2'>Estimated home price is not calculated yet. Please go to Financial Fit Finder Tab.</p>
+                    """, unsafe_allow_html=True)
 
         estimated_home_price_tab4 = 500000
         # price_predict = estimated_home_price_tab4
