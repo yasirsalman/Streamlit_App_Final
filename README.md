@@ -13,7 +13,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/your_username_/Calgary-Home-Navigator">
-    <img src="logo.PNG" alt="Logo" width="80" height="80">
+    <img src="logo.PNG" alt="Logo" width="150" height="150">
   </a>
 
   <h3 align="center">Calgary Home Navigator</h3>
@@ -57,6 +57,7 @@
 
 [product-screenshot]: app_screenshot.PNG
 
+[![Calgary Home Navigator Screen Shot][product-screenshot]](https://example.com)
 
 
 The Calgary Home Navigator is an advanced web application designed for the Calgary real estate market. It aids users in making informed decisions through various analytical tools and interactive maps.
