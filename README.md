@@ -144,7 +144,7 @@ Use this space to list resources you find helpful and would like to give credit 
 
 * [TIBCO Spotfire](https://www.spotfire.com/)
 
-A special note of appreciation to the team at TIBCO Spotfire:
+###  A special note of appreciation to the team at TIBCO Spotfire:
 
 While our project ultimately took a different direction, incorporating Streamlit for its development, we want to acknowledge the generous support initially extended to us by TIBCO Spotfire. Their willingness to provide us access to Spotfire played a significant role in the early stages of our project planning and conceptualization.
 
