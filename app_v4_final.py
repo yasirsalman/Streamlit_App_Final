@@ -2278,65 +2278,44 @@ with tab3:
 # Content for Tab 4
 with tab4:
 
-    if "estimated_home_price_tab4" in st.session_state and st.session_state['estimated_home_price_tab4'] is not None:
-        estimated_price = st.session_state['estimated_home_price_tab4']
-        price_message = f"Estimated Home Price from Financial Fit Finder Tab: ${estimated_price:,.2f}"
+    if "estimated_home_price" in st.session_state:
+        # Retrieve and assign to a variable
+        estimated_home_price_tab4 = st.session_state['estimated_home_price']
+
+        # Now you can use this variable as needed
+        # st.write(f"Estimated Home Price from Financial Fit Finder Tab: ${estimated_home_price_tab4:,.2f}")
+        st.markdown(f"""
+                <style>
+                    .custom-text2 {{
+                        font-size: 25px;  /* Font size for the entire paragraph */
+                        color: yellow;
+                        margin-bottom: -10px;  /* Reduce bottom margin */
+                    }}
+                    .selectbox-label {{
+                        margin-top: -10px;  /* Reduce top margin */
+                    }}
+                </style>
+                <p class='custom-text2'>Estimated Home Price from Financial Fit Finder Tab: {estimated_home_price_tab4}</p>
+                """, unsafe_allow_html=True)
+        # Other operations using estimated_home_price_tab4
     else:
-        price_message = "Estimated home price is not calculated yet. Please go to Financial Fit Finder Tab."
+        # st.write("Estimated home price is not calculated yet. Please go to Financial Fit Finder Tab.")
+        st.markdown(f"""
+                        <style>
+                            .custom-text2 {{
+                                font-size: 25px;  /* Font size for the entire paragraph */
+                                color: yellow;
+                                margin-bottom: -10px;  /* Reduce bottom margin */
+                            }}
+                            .selectbox-label {{
+                                margin-top: -10px;  /* Reduce top margin */
+                            }}
+                        </style>
+                        <p class='custom-text2'>Estimated home price is not calculated yet. Please go to Financial Fit Finder Tab.</p>
+                        """, unsafe_allow_html=True)
+
         estimated_home_price_tab4 = 500000
-
-    st.markdown(f"""
-        <style>
-            .custom-text2 {{
-                font-size: 25px;  /* Font size for the entire paragraph */
-                color: yellow;
-                margin-bottom: -10px;  /* Reduce bottom margin */
-            }}
-            .selectbox-label {{
-                margin-top: -10px;  /* Reduce top margin */
-            }}
-        </style>
-        <p class='custom-text2'>{price_message}</p>
-        """, unsafe_allow_html=True)
-
-    # if "estimated_home_price" in st.session_state:
-    #     # Retrieve and assign to a variable
-    #     estimated_home_price_tab4 = st.session_state['estimated_home_price']
-
-    #     # Now you can use this variable as needed
-    #     st.write(f"Estimated Home Price from Financial Fit Finder Tab: ${estimated_home_price_tab4:,.2f}")
-    #     st.markdown(f"""
-    #             <style>
-    #                 .custom-text2 {{
-    #                     font-size: 25px;  /* Font size for the entire paragraph */
-    #                     color: yellow;
-    #                     margin-bottom: -10px;  /* Reduce bottom margin */
-    #                 }}
-    #                 .selectbox-label {{
-    #                     margin-top: -10px;  /* Reduce top margin */
-    #                 }}
-    #             </style>
-    #             <p class='custom-text2'>Estimated home price is not calculated yet. Please go to Financial Fit Finder Tab.</p>
-    #             """, unsafe_allow_html=True)
-    #     # Other operations using estimated_home_price_tab4
-    # else:
-    #     st.write("Estimated home price is not calculated yet. Please go to Financial Fit Finder Tab.")
-    #     st.markdown(f"""
-    #                     <style>
-    #                         .custom-text2 {{
-    #                             font-size: 25px;  /* Font size for the entire paragraph */
-    #                             color: yellow;
-    #                             margin-bottom: -10px;  /* Reduce bottom margin */
-    #                         }}
-    #                         .selectbox-label {{
-    #                             margin-top: -10px;  /* Reduce top margin */
-    #                         }}
-    #                     </style>
-    #                     <p class='custom-text2'>Estimated home price is not calculated yet. Please go to Financial Fit Finder Tab.</p>
-    #                     """, unsafe_allow_html=True)
-
-    #     estimated_home_price_tab4 = 500000
-    #     # price_predict = estimated_home_price_tab4
+        # price_predict = estimated_home_price_tab4
 
 
     def create_map(comms, comms_sub):
