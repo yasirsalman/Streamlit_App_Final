@@ -13,7 +13,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/your_username_/Calgary-Home-Navigator">
-    <img src="logo.PNG" alt="Logo" width="150" height="150">
+    <img src="logo.PNG" alt="Logo" width="1200" height="1000">
   </a>
 
   <h3 align="center">Calgary Home Navigator</h3>
