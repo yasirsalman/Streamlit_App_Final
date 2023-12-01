@@ -21,7 +21,7 @@
   <p align="center">
     A comprehensive guide to Calgary's real estate market
     <br />
-    <a href="https://github.com/yasirsalman/README.txt"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/yasirsalman/Streamlit_App_Final/README.txt"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/yasirsalman/Calgary-Home-Navigator">View Demo</a>
