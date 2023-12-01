@@ -2055,7 +2055,7 @@ with tab3:
 
     ####################
     # ---------------------------
-# Function to categorize variables based on their range
+    # Function to categorize variables based on their range
     def categorize_variables(se_df, selected_variables):
         variable_categories = {'primary': [], 'secondary': []}
         ranges = []
