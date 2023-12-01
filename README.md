@@ -75,7 +75,7 @@ Use the `README.txt` provided for detailed guidance.
 
 This section details the key frameworks, libraries, and tools used in the development of Calgary Home Navigator. These technologies were chosen for their efficiency, ease of use, and ability to create a robust and user-friendly web application.
 
-* ![Streamlit][Streamlit-badge]
+* [![Streamlit][Streamlit-badge]](https://streamlit.io/)
 * ![Plotly][Plotly-badge]
 * ![Pandas][Pandas-badge]
 * ![GeoPandas][GeoPandas-badge]
