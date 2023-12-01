@@ -1,5 +1,7 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
 import plotly.graph_objects as go
@@ -8,6 +10,22 @@ from pandas.io.formats.style import Styler
 from plotly.subplots import make_subplots
 import geopandas as gpd
 import matplotlib
+import altair as alt
+import os, sys
+import warnings
+warnings.filterwarnings('ignore')
+import folium
+from streamlit_folium import folium_static
+from folium.plugins import *
+import geocoder
+import branca.colormap as cm
+from pandas.api.types import (
+    is_categorical_dtype,
+    is_datetime64_any_dtype,
+    is_numeric_dtype,
+    is_object_dtype,
+)
+
 
 st.set_page_config(layout="wide")
 
@@ -462,14 +480,6 @@ with tab1:
 # Content for Tab 2
 with tab2:
     # st.write("This is the content of Tab 2")
-
-    import streamlit as st
-    import streamlit.components.v1 as components
-    import numpy as np
-    import pandas as pd
-    import matplotlib.pyplot as plt
-    import plotly.graph_objects as go
-    import altair as alt
 
 
     def set_bg_color():
@@ -2087,25 +2097,7 @@ with tab3:
 
 # Content for Tab 4
 with tab4:
-    import streamlit as st
-    import pandas as pd
-    import os, sys
-    import numpy as np
-    import warnings
 
-    warnings.filterwarnings('ignore')
-    import folium
-    from folium.plugins import *
-    import geocoder
-    import geopandas as gpd
-    import branca.colormap as cm
-    from streamlit_folium import folium_static
-    from pandas.api.types import (
-        is_categorical_dtype,
-        is_datetime64_any_dtype,
-        is_numeric_dtype,
-        is_object_dtype,
-    )
 
     if "estimated_home_price" in st.session_state:
         # Retrieve and assign to a variable
