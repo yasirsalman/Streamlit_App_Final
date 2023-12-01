@@ -112,13 +112,6 @@ Before you begin, ensure you have the following installed:
    streamlit run app_v4_final.py
    ```
 
-### Additional Setup
-
-Follow these additional steps if you need to configure or customize the application:
-
-1. Edit the configuration files located in the `config` directory to match your local environment or preferences.
-2. If using external APIs or databases, ensure you have the necessary credentials and update the relevant configuration files.
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
