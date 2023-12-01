@@ -136,6 +136,7 @@ custom_css = """
 # Inject the CSS into Streamlit
 st.markdown(custom_css, unsafe_allow_html=True)
 
+# Modify the tabs to be rounded
 st.markdown("""
 <style>
     /* Target the container of the tabs */
@@ -173,6 +174,20 @@ with tab1:
     ######### FUNCTIONS CALCULATIONS ################################################################
 
     def calculate_stress_test_rate(base_rate, buffer, floor_rate):
+        """
+        Calculate the stress test rate for a mortgage.
+
+        This function computes the stress test rate by adding a buffer to the base rate and ensuring that
+        the result does not fall below a specified floor rate.
+
+        Parameters:
+        - base_rate (float): The base interest rate for the mortgage.
+        - buffer (float): An additional percentage to add to the base rate as a buffer.
+        - floor_rate (float): The minimum allowable rate after adding the buffer.
+
+        Returns:
+        - float: The higher value between the sum of the base rate and buffer, and the floor rate.
+        """
         stress_test_rate = base_rate + buffer
         return max(stress_test_rate, floor_rate)
 
