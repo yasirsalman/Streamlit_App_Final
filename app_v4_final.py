@@ -2304,7 +2304,7 @@ with tab4:
                         <style>
                             .custom-text2 {{
                                 font-size: 18px;  /* Font size for the entire paragraph */
-                                color: yellow;
+                                color: red;
                                 margin-bottom: -10px;  /* Reduce bottom margin */
                             }}
                             .selectbox-label {{
