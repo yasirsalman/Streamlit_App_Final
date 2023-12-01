@@ -21,10 +21,10 @@
   <p align="center">
     A comprehensive guide to Calgary's real estate market
     <br />
-    <a href="https://github.com/yasirsalman/Streamlit_App_Final/README.txt"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/yasirsalman/Streamlit_App_Final/blob/main/README.txt"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/yasirsalman/Calgary-Home-Navigator">View Demo</a>
+    <a href="https://yyc-living-lens.streamlit.app/">View Demo</a>
     ·
     <a href="https://github.com/yasirsalman/Calgary-Home-Navigator/issues">Report Bug</a>
     ·
