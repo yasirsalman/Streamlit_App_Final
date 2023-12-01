@@ -74,14 +74,20 @@ Use the `README.txt` provided for detailed guidance.
 
 ### Built With
 
-This section lists major frameworks and libraries used in building the project:
+This section details the key frameworks, libraries, and tools used in the development of Calgary Home Navigator. These technologies were chosen for their efficiency, ease of use, and ability to create a robust and user-friendly web application.
 
-* [![Streamlit][Streamlit.io]][Streamlit-url]
-* [![Pandas][Pandas.pydata.org]][Pandas-url]
-* [![NumPy][NumPy.org]][NumPy-url]
-* [![Plotly][Plotly.com]][Plotly-url]
+* ![Streamlit][Streamlit-badge]
+* ![Plotly][Plotly-badge]
+* ![Pandas][Pandas-badge]
+* ![GeoPandas][GeoPandas-badge]
+* ![Folium][Folium-badge]
+* ![Numpy][Numpy-badge]
+* ![Matplotlib][Matplotlib-badge]
+* ![Altair][Altair-badge]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -97,3 +103,26 @@ This project uses Python and several Python libraries. Ensure Python 3.8+ is ins
 1. Clone the repo
    ```sh
    git clone https://github.com/your_username_/Calgary-Home-Navigator.git
+
+
+
+
+---
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[Streamlit-badge]: https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white
+[Streamlit-url]: https://streamlit.io/
+[Plotly-badge]: https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=Plotly&logoColor=white
+[Plotly-url]: https://plotly.com/
+[Pandas-badge]: https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white
+[Pandas-url]: https://pandas.pydata.org/
+[GeoPandas-badge]: https://img.shields.io/badge/GeoPandas-2B5B84?style=for-the-badge&logo=GeoPandas&logoColor=white
+[GeoPandas-url]: https://geopandas.org/
+[Folium-badge]: https://img.shields.io/badge/Folium-77B829?style=for-the-badge&logo=Folium&logoColor=white
+[Folium-url]: https://python-visualization.github.io/folium/
+[Numpy-badge]: https://img.shields.io/badge/Numpy-013243?style=for-the-badge&logo=numpy&logoColor=white
+[Numpy-url]: https://numpy.org/
+[Matplotlib-badge]: https://img.shields.io/badge/Matplotlib-263238?style=for-the-badge&logo=Matplotlib&logoColor=white
+[Matplotlib-url]: https://matplotlib.org/
+[Altair-badge]: https://img.shields.io/badge/Altair-F9AB00?style=for-the-badge&logo=Altair&logoColor=white
+[Altair-url]: https://altair-viz.github.io/
