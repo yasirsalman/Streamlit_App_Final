@@ -25,10 +25,7 @@
     <br />
     <br />
     <a href="https://yyc-living-lens.streamlit.app/">View Demo</a>
-    ·
-    <a href="https://github.com/yasirsalman/Calgary-Home-Navigator/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/yasirsalman/Calgary-Home-Navigator/issues">Request Feature</a>
+
   </p>
 </div>
 
