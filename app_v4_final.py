@@ -31,7 +31,6 @@ st.set_page_config(layout="wide")
 
 ##### LOGO ##########
 
-# Assuming your logo is a local file. For a URL, just replace the path with the URL.
 st.markdown(
     f"""
     <div style="text-align: center">
@@ -466,7 +465,7 @@ with tab1:
 
             # st.markdown('<div class="framed-col">', unsafe_allow_html=True)
 
-            # Create the HTML content string with your dynamic values
+            # Creating the HTML content string with dynamic values
             if 'monthly_mortgage_payment' in locals():
                 summary_html = f"""
                 <div class="summary-box">
@@ -498,16 +497,16 @@ with tab1:
 
             # st.markdown('<div class="framed-col">', unsafe_allow_html=True)
 
-            # Define your color palette
+            # Define the color palette
 
-            # Your expenses data
+            # Expenses data
             expenses = {"Mortgage": monthly_mortgage_payment, "Property Taxes": monthly_property_tax_bill,
                         "Mortgage Insurance": monthly_insurance_premium_property}
 
-            # Define your color palette
+            # Define color palette
             color_palette = ['#00695C', '#FFECB3', '#FFB74D']
 
-            # Your expenses data
+            # Expenses data
             expenses = {
                 "Mortgage": monthly_mortgage_payment,
                 "Property Taxes": monthly_property_tax_bill,
@@ -567,27 +566,53 @@ with tab2:
         )
 
 
-    # Define a function to calculate the liquid net worth over time (Buying Scenario)
+    # Defining a function to calculate the liquid net worth over time (Buying Scenario)
     def calculate_buying_liquid_net_worth(purchase_price, down_payment_percent, mortgage_interest_rate,
                                           amortization_period, home_appreciation_rate, property_tax_percent,
                                           initial_annual_maintenance, monthly_utilities, monthly_insurance,
                                           monthly_condo_fees,
                                           other_monthly_payments, sale_transaction_costs_percent, lump_sum_fee,
                                           general_inflation_rate):
+        """
+        Calculate the liquid net worth over time for a home purchase scenario.
+
+        This function computes the year-over-year liquid net worth of buying a home, considering various expenses,
+        mortgage payments, property appreciation, and other factors.
+
+        Args:
+            purchase_price (float): The purchase price of the home.
+            down_payment_percent (float): The percentage of the purchase price paid as down payment.
+            mortgage_interest_rate (float): The annual mortgage interest rate.
+            amortization_period (int): The total number of years for mortgage repayment.
+            home_appreciation_rate (float): The annual rate at which the home value appreciates.
+            property_tax_percent (float): The annual property tax rate as a percentage of the home value.
+            initial_annual_maintenance (float): The initial annual maintenance cost for the home.
+            monthly_utilities (float): The monthly cost of utilities.
+            monthly_insurance (float): The monthly cost of home insurance.
+            monthly_condo_fees (float): The monthly condo fees, if applicable.
+            other_monthly_payments (float): Any other monthly payments associated with the home.
+            sale_transaction_costs_percent (float): The percentage of the home value to be paid as transaction costs when selling.
+            lump_sum_fee (float): Lump sum fee added to the mortgage balance if down payment is less than 20%.
+            general_inflation_rate (float): The general annual inflation rate.
+
+        Returns:
+            dict: A dictionary containing the liquid net worth calculations for each year of the amortization period.
+            float: The initial down payment amount.
+        """
 
         down_payment = purchase_price * (down_payment_percent / 100)
         initial_loan_amount = purchase_price - down_payment
 
-        # Add lump sum fee to the mortgage balance if down payment is less than 20%
+        # Adding lump sum fee to the mortgage balance if down payment is less than 20%
         loan_amount = initial_loan_amount + lump_sum_fee if down_payment_percent < 20 else initial_loan_amount
 
-        # Convert annual interest rate to monthly interest rate
+        # Converting annual interest rate to monthly interest rate
         semi_annual_rate = mortgage_interest_rate / 2 / 100
         annual_effective_rate = (1 + semi_annual_rate) ** 2 - 1
         monthly_interest_rate = (1 + annual_effective_rate) ** (1 / 12) - 1
         total_payments = amortization_period * 12
 
-        # Calculate monthly mortgage payment
+        # Calculating monthly mortgage payment
         if mortgage_interest_rate == 0:
             monthly_payment = loan_amount / total_payments
         else:
@@ -597,10 +622,10 @@ with tab2:
         current_mortgage_balance = loan_amount
 
         for year in range(amortization_period + 1):
-            # Calculate home value
+            # Calculating home value
             current_home_value = purchase_price * (1 + home_appreciation_rate / 100) ** year
 
-            # Reset interest and principal sums for the year
+            # Resetting interest and principal sums for the year
             annual_interest_sum = 0
             annual_principal_sum = 0
 
@@ -612,7 +637,7 @@ with tab2:
                     annual_interest_sum += monthly_interest
                     annual_principal_sum += monthly_principal
 
-            # Calculate annual expenses
+            # Calculating annual expenses
             annual_property_tax = current_home_value * (property_tax_percent / 100) if year > 0 else 0
             annual_maintenance = initial_annual_maintenance * (
                         1 + general_inflation_rate / 100) ** year if year > 0 else 0
@@ -622,12 +647,12 @@ with tab2:
             annual_other = other_monthly_payments * 12 if year > 0 else 0
             annual_housing_expense = monthly_payment * 12 + annual_property_tax + annual_maintenance + annual_utilities + annual_insurance + annual_condo_fees + annual_other
 
-            # Calculate home equity and selling costs
+            # Calculating home equity and selling costs
             home_equity_pre_selling = current_home_value - current_mortgage_balance
             selling_costs = current_home_value * (sale_transaction_costs_percent / 100)
             home_equity_post_selling = home_equity_pre_selling - selling_costs
 
-            # Store results in the dictionary
+            # Storing results in the dictionary
             buying_liquid_net_worth_over_time[year] = {
                 "Home Value": current_home_value,
                 "Mortgage Balance": current_mortgage_balance,
@@ -653,6 +678,26 @@ with tab2:
     def calculate_rental_liquid_net_worth(home_purchase_costs, down_payment_amount, monthly_rent_payment,
                                           annual_rent_increase, monthly_utilities, monthly_renters_insurance,
                                           other_monthly_fees, annual_investment_return, buying_annual_housing_expenses):
+        """
+        Calculate the liquid net worth over time for a rental scenario.
+
+        This function computes the year-over-year liquid net worth of renting a property, considering rent payments,
+        utility costs, insurance, and investment returns on the money that would have been spent on buying a home.
+
+        Args:
+            home_purchase_costs (float): The upfront costs involved in purchasing a home.
+            down_payment_amount (float): The down payment amount for a home purchase.
+            monthly_rent_payment (float): The monthly rent payment for the rental property.
+            annual_rent_increase (float): The annual percentage increase in rent.
+            monthly_utilities (float): The monthly cost of utilities for the rental property.
+            monthly_renters_insurance (float): The monthly cost of renters' insurance.
+            other_monthly_fees (float): Any other monthly fees associated with renting.
+            annual_investment_return (float): The annual return rate on investments.
+            buying_annual_housing_expenses (list): List of annual housing expenses if buying a home.
+
+        Returns:
+            dict: A dictionary containing the liquid net worth calculations for each year of the comparison period.
+        """
 
         # Initial Investment Portfolio
         implied_initial_investment_portfolio = home_purchase_costs + down_payment_amount
@@ -665,12 +710,12 @@ with tab2:
             # BOP Investment Portfolio is the EOP from the previous year
             bop_investment_portfolio = eop_investment_portfolio
 
-            # Calculate Annual Housing Expense for Renting
+            # Calculating Annual Housing Expense for Renting
             annual_housing_expense_renting = annual_rent_payment + (
                         monthly_utilities + monthly_renters_insurance + other_monthly_fees) * 12
 
             if year > 0:
-                # Adjust for rent increase from year 1 onwards
+                # Adjusting for rent increase from year 1 onwards
                 annual_rent_payment *= (1 + annual_rent_increase / 100)
                 # Incremental Cash Flows versus Buying
                 incremental_cash_flows = max(0, -1 * annual_housing_expense_renting - (
@@ -711,10 +756,10 @@ with tab2:
         st.markdown(
             "Make an informed decision between buying and renting with our 'Buy vs. Rent Calculator'. Input your financial details to compare the long-term impact on your net worth, and see a clear visualization of potential financial outcomes over time.")
 
-        # Add an empty line (space) after the text
+        # Adding an empty line (space) after the text
         st.write(" ")
 
-        # Initialize session_state variables if they are not already defined
+        # Initializing session_state variables if they are not already defined
         if 'general_inflation_rate' not in st.session_state:
             st.session_state.general_inflation_rate = 0.0
 
@@ -750,10 +795,10 @@ with tab2:
             </style>
             """, unsafe_allow_html=True)
 
-        # Define your columns
+        # Defining columns
         buffer, col2, col3 = st.columns([1.5, 1.5, 4])
 
-        # Initialize the variables
+        # Initializing the variables
         years = []
         net_worth_values = []
         home_values = []
@@ -784,7 +829,7 @@ with tab2:
                                                        value=5.0,
                                                        help="Enter the percentage of the home's value that you will pay as a down payment.")
 
-                # Determine Mortgage Insurance Need and Lump Sum Fee
+                # Determining Mortgage Insurance Need and Lump Sum Fee
                 if down_payment_percent < 20:
                     mortgage_insurance_needed = "Yes"
                     lump_sum_fee = st.number_input("Lump Sum Fee Added to Mortgage Balance ($)", value=2000.0,
@@ -862,7 +907,7 @@ with tab2:
                 submit_button = st.form_submit_button(label='Calculate')
 
                 if submit_button:
-                    # Perform calculation
+                    # Performing calculation
                     liquid_net_worth, down_payment_amount = calculate_buying_liquid_net_worth(
                         st.session_state.home_purchase_price, down_payment_percent, mortgage_interest_rate,
                         mortgage_amortization, annual_home_appreciation, annual_property_tax_percent,
@@ -870,11 +915,11 @@ with tab2:
                         other_monthly_payments, home_sale_costs_percent, lump_sum_fee,
                         st.session_state.general_inflation_rate)
 
-                    # Store the calculated down payment amount in session_state
+                    # Storing the calculated down payment amount in session_state
                     st.session_state.down_payment_amount = down_payment_amount
                     st.session_state.liquid_net_worth = liquid_net_worth
 
-                    # # Display the results
+                    # # Displaying the results
                     # st.write("Buying Liquid Net Worth Over Time:")
                     # for year, data in liquid_net_worth.items():
                     #     st.write(f"Year {year}:")
@@ -890,7 +935,7 @@ with tab2:
                     #     st.write(f"Principal Payment: ${data['Principal Payment']:,.2f}")
                     #     st.write("---")  # Add a separator for readability
 
-                    # Prepare data for plotting
+                    # Preparing data for plotting
                     years = list(liquid_net_worth.keys())
                     net_worth_values = [data['Liquid Net Worth'] for data in liquid_net_worth.values()]
                     home_values = [data['Home Value'] for data in liquid_net_worth.values()]
@@ -928,12 +973,10 @@ with tab2:
                                                                       min_value=0.0,
                                                                       help="Enter the expected annual inflation rate.")
 
-            # Add a separate button for Rental Scenario or use the same 'Calculate' button
-            # If using the same button, ensure it's outside the form
 
             # Rental Scenario Calculations
             if submit_button:
-                # Extract the annual housing expense from the buying results for comparison
+                # Extracting the annual housing expense from the buying results for comparison
                 buying_annual_housing_expenses = [data['Annual Housing Expense'] for data in
                                                   st.session_state.liquid_net_worth.values()]
 
@@ -942,7 +985,7 @@ with tab2:
                 # st.write("Down Payment Amount: ", st.session_state.down_payment_amount)
                 # st.write("Home Purchase Costs: ", st.session_state.home_purchase_costs)
 
-                # Calculate the Rental Liquid Net Worth
+                # Calculating the Rental Liquid Net Worth
                 rental_results = calculate_rental_liquid_net_worth(st.session_state.home_purchase_costs,
                                                                    st.session_state.down_payment_amount,
                                                                    monthly_rent_payment,
@@ -952,7 +995,7 @@ with tab2:
                                                                    annual_investment_return,
                                                                    buying_annual_housing_expenses)
 
-                # # Display the results
+                # # Displaying the results
                 # st.write("Rental Liquid Net Worth Over Time:")
                 # for year, data in rental_results.items():
                 #     st.write(f"Year {year}:")
@@ -988,7 +1031,7 @@ with tab2:
                 # crossover_month = None
                 # crossover_time = None
 
-                # # Loop through the years to find the crossover interval
+                # # Looping through the years to find the crossover interval
                 # for year in range(mortgage_amortization - 1):
                 #     buying_current_year = buying_liquid_net_worth[year]["Liquid Net Worth"]
                 #     buying_next_year = buying_liquid_net_worth[year + 1]["Liquid Net Worth"]
@@ -1090,7 +1133,7 @@ with tab2:
                 crossover_month = None
                 crossover_time = None
 
-                # Loop through the years to find the crossover interval
+                # Looping through the years to find the crossover interval
                 for year in range(mortgage_amortization - 1):
                     buying_current_year = buying_liquid_net_worth[year]["Liquid Net Worth"]
                     buying_next_year = buying_liquid_net_worth[year + 1]["Liquid Net Worth"]
@@ -1098,7 +1141,7 @@ with tab2:
                     rental_next_year = rental_liquid_net_worth[year + 1]["Liquid Net Worth"]
 
                     if buying_current_year < rental_current_year and buying_next_year >= rental_next_year:
-                        # Interpolate within this year range
+                        # Interpolating within this year range
                         for month in range(1, 13):  # Check each month
                             fraction_of_year = month / 12.0
                             interpolated_buying = buying_current_year + (
@@ -1140,7 +1183,7 @@ with tab2:
 
                 st.write('\n')
 
-                # Create Buying Scenario Dataframe
+                # Creating Buying Scenario Dataframe
                 buying_df = pd.DataFrame({
                     "Year": list(range(mortgage_amortization + 1)),
                     "Home Value": [data["Home Value"] for data in buying_liquid_net_worth.values()],
@@ -1159,7 +1202,7 @@ with tab2:
                     "Liquid Net Worth": [data["Liquid Net Worth"] for data in buying_liquid_net_worth.values()]
                 })
 
-                # Create Renting Scenario Dataframe
+                # Creating Renting Scenario Dataframe
                 renting_df = pd.DataFrame({
                     "Year": list(range(mortgage_amortization + 1)),
                     "Annual Housing Expense Renting": [data["Annual Housing Expense Renting"] for data in
@@ -1171,7 +1214,7 @@ with tab2:
                     "Liquid Net Worth": [data["Liquid Net Worth"] for data in rental_liquid_net_worth.values()]
                 })
 
-                # Prepare data for plotting
+                # Preparing data for plotting
                 years = list(buying_liquid_net_worth.keys())
                 net_worth_values = [data['Liquid Net Worth'] for data in buying_liquid_net_worth.values()]
                 home_values = [data['Home Value'] for data in buying_liquid_net_worth.values()]
@@ -1184,13 +1227,13 @@ with tab2:
 
                 rental_net_worth_values = [data['Liquid Net Worth'] for data in rental_liquid_net_worth.values()]
 
-                # Extract Rental Liquid Net Worth values
+                # Extracting Rental Liquid Net Worth values
                 rental_net_worth_values = [data['Liquid Net Worth'] for data in rental_liquid_net_worth.values()]
 
-                # Initialize a list to store the differences
+                # Initializing a list to store the differences
                 net_worth_differences = []
 
-                # Calculate the difference for each year
+                # Calculating the difference for each year
                 for year in years:
                     buying_net_worth = buying_liquid_net_worth[year]["Liquid Net Worth"]
                     rental_net_worth = rental_liquid_net_worth[year]["Liquid Net Worth"]
@@ -1246,7 +1289,7 @@ with tab2:
                 crossover_month = None
                 crossover_time = None
 
-                # Loop through the years to find the crossover interval
+                # Looping through the years to find the crossover interval
                 for year in range(mortgage_amortization - 1):
                     buying_current_year = buying_liquid_net_worth[year]["Liquid Net Worth"]
                     buying_next_year = buying_liquid_net_worth[year + 1]["Liquid Net Worth"]
@@ -1353,7 +1396,7 @@ with tab2:
                 crossover_month = None
                 crossover_time = None
 
-                # Loop through the years to find the crossover interval
+                # Looping through the years to find the crossover interval
                 for year in range(mortgage_amortization - 1):
                     buying_current_year = buying_liquid_net_worth[year]["Liquid Net Worth"]
                     buying_next_year = buying_liquid_net_worth[year + 1]["Liquid Net Worth"]
@@ -1403,7 +1446,7 @@ with tab2:
 
                 st.write('\n')
 
-                # Create Buying Scenario Dataframe
+                # Creating Buying Scenario Dataframe
                 buying_df = pd.DataFrame({
                     "Year": list(range(mortgage_amortization + 1)),
                     "Home Value": [data["Home Value"] for data in buying_liquid_net_worth.values()],
@@ -1422,7 +1465,7 @@ with tab2:
                     "Liquid Net Worth": [data["Liquid Net Worth"] for data in buying_liquid_net_worth.values()]
                 })
 
-                # Create Renting Scenario Dataframe
+                # Creating Renting Scenario Dataframe
                 renting_df = pd.DataFrame({
                     "Year": list(range(mortgage_amortization + 1)),
                     "Annual Housing Expense Renting": [data["Annual Housing Expense Renting"] for data in
@@ -1473,7 +1516,7 @@ with tab2:
                     height=600  # Height of the figure in pixels
                 )
 
-                # Display the plot in Streamlit
+                # Displaying the plot in Streamlit
                 st.plotly_chart(fig, use_container_width=True)
 
             elif plot_option == 'Annual Housing Expense - Buying':
@@ -1501,7 +1544,7 @@ with tab2:
                 crossover_month = None
                 crossover_time = None
 
-                # Loop through the years to find the crossover interval
+                # Looping through the years to find the crossover interval
                 for year in range(mortgage_amortization - 1):
                     buying_current_year = buying_liquid_net_worth[year]["Liquid Net Worth"]
                     buying_next_year = buying_liquid_net_worth[year + 1]["Liquid Net Worth"]
@@ -1509,7 +1552,7 @@ with tab2:
                     rental_next_year = rental_liquid_net_worth[year + 1]["Liquid Net Worth"]
 
                     if buying_current_year < rental_current_year and buying_next_year >= rental_next_year:
-                        # Interpolate within this year range
+                        # Interpolating within this year range
                         for month in range(1, 13):  # Check each month
                             fraction_of_year = month / 12.0
                             interpolated_buying = buying_current_year + (
@@ -1552,7 +1595,7 @@ with tab2:
                 st.write('\n')
                 st.write('\n')
 
-                # Create Buying Scenario Dataframe
+                # Creating Buying Scenario Dataframe
                 buying_df = pd.DataFrame({
                     "Year": list(range(mortgage_amortization + 1)),
                     "Home Value": [data["Home Value"] for data in buying_liquid_net_worth.values()],
@@ -1577,7 +1620,7 @@ with tab2:
                     "Annual Other": [data["Annual Other"] for data in buying_liquid_net_worth.values()]
                 })
 
-                # Extract data from the dataframes
+                # Extracting data from the dataframes
                 years = buying_df['Year']
                 buying_mortgage_principal = buying_df['Principal Payment']
                 buying_mortgage_interest = buying_df['Interest Payment']
@@ -1600,7 +1643,7 @@ with tab2:
                     go.Bar(name='Other', x=years, y=buying_other)
                 ])
 
-                # Change the bar mode to stack
+                # Changing the bar mode to stack
                 fig_buying.update_layout(
                     barmode='stack',
                     title='Buying Annual Expenses Breakdown',
@@ -1626,7 +1669,7 @@ with tab2:
                     height=700  # Height of the figure in pixels
                 )
 
-                # Display the plots in Streamlit
+                # Displaying the plots in Streamlit
                 st.plotly_chart(fig_buying)
 
 
@@ -1655,7 +1698,7 @@ with tab2:
                 crossover_month = None
                 crossover_time = None
 
-                # Loop through the years to find the crossover interval
+                # Looping through the years to find the crossover interval
                 for year in range(mortgage_amortization - 1):
                     buying_current_year = buying_liquid_net_worth[year]["Liquid Net Worth"]
                     buying_next_year = buying_liquid_net_worth[year + 1]["Liquid Net Worth"]
@@ -1663,7 +1706,7 @@ with tab2:
                     rental_next_year = rental_liquid_net_worth[year + 1]["Liquid Net Worth"]
 
                     if buying_current_year < rental_current_year and buying_next_year >= rental_next_year:
-                        # Interpolate within this year range
+                        # Interpolating within this year range
                         for month in range(1, 13):  # Check each month
                             fraction_of_year = month / 12.0
                             interpolated_buying = buying_current_year + (
@@ -1706,7 +1749,7 @@ with tab2:
                 st.write('\n')
                 st.write('\n')
 
-                # Create Renting Scenario Dataframe
+                # Creating Renting Scenario Dataframe
                 renting_df = pd.DataFrame({
                     "Year": list(range(mortgage_amortization + 1)),
                     "Annual Housing Expense Renting": [data["Annual Housing Expense Renting"] for data in
@@ -1723,7 +1766,7 @@ with tab2:
                     "Other Annual Fees": [data["Other Annual Fees"] for data in rental_liquid_net_worth.values()]
                 })
 
-                # Extract data from the dataframes
+                # Extracting data from the dataframes
                 years = renting_df['Year']
                 renting_rent = renting_df['Annual Rent Payment']
                 renting_utilities = renting_df['Annual Utilities']
@@ -1738,7 +1781,7 @@ with tab2:
                     go.Bar(name='Other Fees', x=years, y=renting_other)
                 ])
 
-                # Change the bar mode to stack
+                # Changing the bar mode to stack
                 fig_renting.update_layout(
                     barmode='stack',
                     title='Renting Annual Expenses Breakdown',
@@ -1764,7 +1807,7 @@ with tab2:
                     height=700  # Height of the figure in pixels
                 )
 
-                # Display the plots in Streamlit
+                # Displaying the plots in Streamlit
                 st.plotly_chart(fig_renting)
 
 
@@ -1793,7 +1836,7 @@ with tab2:
                 crossover_month = None
                 crossover_time = None
 
-                # Loop through the years to find the crossover interval
+                # Looping through the years to find the crossover interval
                 for year in range(mortgage_amortization - 1):
                     buying_current_year = buying_liquid_net_worth[year]["Liquid Net Worth"]
                     buying_next_year = buying_liquid_net_worth[year + 1]["Liquid Net Worth"]
@@ -1801,7 +1844,7 @@ with tab2:
                     rental_next_year = rental_liquid_net_worth[year + 1]["Liquid Net Worth"]
 
                     if buying_current_year < rental_current_year and buying_next_year >= rental_next_year:
-                        # Interpolate within this year range
+                        # Interpolating within this year range
                         for month in range(1, 13):  # Check each month
                             fraction_of_year = month / 12.0
                             interpolated_buying = buying_current_year + (
@@ -1844,7 +1887,7 @@ with tab2:
                 st.write('\n')
                 st.write('\n')
 
-                # Create Buying Scenario Dataframe
+                # Creating Buying Scenario Dataframe
                 buying_df = pd.DataFrame({
                     "Year": list(range(mortgage_amortization + 1)),
                     "Home Value": [data["Home Value"] for data in buying_liquid_net_worth.values()],
@@ -1869,7 +1912,7 @@ with tab2:
                     "Annual Other": [data["Annual Other"] for data in buying_liquid_net_worth.values()]
                 })
 
-                # Create Renting Scenario Dataframe
+                # Creating Renting Scenario Dataframe
                 renting_df = pd.DataFrame({
                     "Year": list(range(mortgage_amortization + 1)),
                     "Annual Housing Expense Renting": [data["Annual Housing Expense Renting"] for data in
@@ -1886,7 +1929,7 @@ with tab2:
                     "Other Annual Fees": [data["Other Annual Fees"] for data in rental_liquid_net_worth.values()]
                 })
 
-                # Create and style the DataFrame
+                # Creating and styling the DataFrame
                 buying_heatmap_columns = ['Home Value', 'Mortgage Balance', 'Liquid Net Worth']
                 renting_heatmap_columns = ['Liquid Net Worth']
 
@@ -1894,7 +1937,7 @@ with tab2:
                 styled_renting_df = renting_df.style.background_gradient(cmap='coolwarm',
                                                                          subset=renting_heatmap_columns)
 
-                # Display styled DataFrame in Streamlit
+                # Displaying styled DataFrame in Streamlit
                 st.dataframe(styled_buying_df)
                 st.dataframe(styled_renting_df)
 
@@ -1909,7 +1952,7 @@ with tab2:
 with tab3:
     ####### CHANGE COLOR TAB ################
 
-    # Define your custom styles using CSS
+    # Define custom styles using CSS
     custom_css_tab3 = """
         <style>
             /* You can use .st-ck to target the multiselect widget container */
@@ -1933,11 +1976,11 @@ with tab3:
         <style>
             /* Target the multiselect widget's text */
             .Select-multi-value-wrapper .Select-value-label {
-                color: ##F9FBE7; /* Replace with your desired hex color code */
+                color: ##F9FBE7;
             }
             /* You may also need to change the color of the placeholder text */
             .Select-placeholder {
-                color: ##F9FBE7; /* Replace with your desired hex color code */
+                color: ##F9FBE7;
             }
         </style>
     """
@@ -1945,7 +1988,7 @@ with tab3:
     # Inject custom CSS with markdown
     st.markdown(custom_css, unsafe_allow_html=True)
 
-    # Write your custom CSS
+    # Write custom CSS
     custom_css_text = """
         <style>
             /* Target the container of the selected options */
@@ -2071,7 +2114,6 @@ with tab3:
         sorted_ranges = sorted(ranges, key=lambda x: x[1])
 
         # Split variables into two groups
-        # This is a simple approach - you might need a more sophisticated method based on your data
         median_index = len(sorted_ranges) // 2
         for i, (variable, _) in enumerate(sorted_ranges):
             if i < median_index:
