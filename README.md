@@ -21,16 +21,18 @@
   <p align="center">
     A comprehensive guide to Calgary's real estate market
     <br />
-    <a href="https://github.com/your_username_/Calgary-Home-Navigator"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/yasirsalman/Calgary-Home-Navigator/blob/main/README.txt"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/your_username_/Calgary-Home-Navigator">View Demo</a>
+    <a href="https://github.com/yasirsalman/Calgary-Home-Navigator">View Demo</a>
     ·
-    <a href="https://github.com/your_username_/Calgary-Home-Navigator/issues">Report Bug</a>
+    <a href="https://github.com/yasirsalman/Calgary-Home-Navigator/issues">Report Bug</a>
     ·
-    <a href="https://github.com/your_username_/Calgary-Home-Navigator/issues">Request Feature</a>
+    <a href="https://github.com/yasirsalman/Calgary-Home-Navigator/issues">Request Feature</a>
   </p>
 </div>
+
+
 
 <!-- TABLE OF CONTENTS -->
 <details>
