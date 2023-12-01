@@ -1,14 +1,6 @@
 <!-- Improved compatibility of back to top link -->
 <a name="readme-top"></a>
 
-<!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -133,7 +125,22 @@ Follow these additional steps if you need to configure or customize the applicat
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+<!-- LICENSE -->
+## License
 
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- CONTACT -->
+## Contact
+
+Yasir Salman - yasir_salman@outlook.com
+
+Project Link: [https://github.com/yasirsalman/Streamlit_App_Final](https://github.com/yasirsalman/Streamlit_App_Final)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 ---
 
 <!-- MARKDOWN LINKS & IMAGES -->
