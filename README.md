@@ -136,7 +136,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Yasir Salman - yasir_salman@outlook.com
+Adriana Gordon - aferrebus3@gatech.edu
+Luisa Porras - lmendoza31@gatech.edu
+Yasir Salman - ysalman6@gatech.edu
+Yemi Dare-Ode - odareode3@gatech.edu
+
 
 Project Link: [https://github.com/yasirsalman/Streamlit_App_Final](https://github.com/yasirsalman/Streamlit_App_Final)
 
