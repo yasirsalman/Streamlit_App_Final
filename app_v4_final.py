@@ -2081,6 +2081,17 @@ with tab3:
 
         return variable_categories
 
+    from plotly.subplots import make_subplots
+    import plotly.graph_objects as go
+
+    # Function to determine unique y-axes for each variable
+    def assign_y_axis(se_df, selected_variables):
+        y_axes = {}
+        for i, variable in enumerate(selected_variables, start=1):
+            axis_name = f'y{i}'
+            y_axes[variable] = axis_name
+        return y_axes
+
     # Streamlit widget for multi-selection
     selected_variables = st.multiselect(
         'Select Factors',
@@ -2088,34 +2099,47 @@ with tab3:
         default=se_df.columns[1]  # Default to the first variable
     )
 
-    # Categorize variables
-    variable_categories = categorize_variables(se_df, selected_variables)
+    # Assign y-axes to variables
+    y_axes = assign_y_axis(se_df, selected_variables)
 
-    # Create a Plotly figure
+    # Create a Plotly figure with dynamic y-axes
     fig2 = make_subplots(specs=[[{"secondary_y": True}]])
 
-    # Add traces for primary variables
-    for variable in variable_categories['primary']:
-        fig2.add_trace(go.Scatter(x=se_df['year_month'], y=se_df[variable], name=variable), secondary_y=False)
+    # Colors for traces (You might want to choose a better color scheme)
+    colors = px.colors.qualitative.Plotly
 
-    # Add traces for secondary variables
-    for variable in variable_categories['secondary']:
-        fig2.add_trace(go.Scatter(x=se_df['year_month'], y=se_df[variable], name=variable), secondary_y=True)
+    # Add traces to the figure
+    for i, (variable, axis) in enumerate(y_axes.items()):
+        fig2.add_trace(
+            go.Scatter(x=se_df['year_month'], y=se_df[variable], name=variable, yaxis=axis, line=dict(color=colors[i % len(colors)])),
+            secondary_y=False if i % 2 == 0 else True  # Alternate assignment for demonstration
+        )
+
+        # Add y-axis to layout (one per variable)
+        axis_position = 0.05 * i
+        fig2.update_layout(**{
+            axis: dict(
+                title=variable,
+                titlefont=dict(color=colors[i % len(colors)]),
+                tickfont=dict(color=colors[i % len(colors)]),
+                overlaying="y",
+                side="left" if i % 2 == 0 else "right",
+                position=axis_position
+            )
+        })
 
     # Update layout
     fig2.update_layout(
         title_text="Selected Variables Over Time",
         xaxis_title="Year-Month",
         width=1600,  # Width of the figure in pixels
-        height=600  # Height of the figure in pixels
+        height=600,  # Height of the figure in pixels
+        showlegend=True
     )
-
-    # Update y-axes titles
-    fig2.update_yaxes(title_text="Primary Axis", secondary_y=False)
-    fig2.update_yaxes(title_text="Secondary Axis", secondary_y=True)
 
     # Display the plot in Streamlit
     st.plotly_chart(fig2)
+
 
 
 
