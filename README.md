@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/yasirsalman/Streamlit_App_Final/blob/main/logo.PNG">
-    <img src="logo.PNG" alt="Logo" width="600" height="400">
+    <img src="images/logo.PNG" alt="Logo" width="600" height="400">
   </a>
 
   <h3 align="center">Calgary Home Navigator</h3>
@@ -43,7 +43,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[product-screenshot]: app_screenshot.PNG
+[product-screenshot]: images/app_screenshot.PNG
 
 [![Calgary Home Navigator Screen Shot][product-screenshot]](https://github.com/yasirsalman/Streamlit_App_Final/blob/main/app_screenshot.PNG)
 
