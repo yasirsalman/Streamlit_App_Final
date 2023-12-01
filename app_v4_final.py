@@ -2393,51 +2393,97 @@ with tab4:
                         df = df[df[column].astype(str).str.contains(user_text_input.upper())]
         return df
 
+# ---------------
+    # Initialize session state variables for map state
+    if 'map_zoom' not in st.session_state:
+        st.session_state['map_zoom'] = 10  # Default zoom level
+    if 'map_center' not in st.session_state:
+        st.session_state['map_center'] = [51.049999, -114.066666]  # Default center coordinates
 
-
+    # Modified property_map function
     def property_map(mini_df, sub, comms):
+        # Define map center and zoom
         if (len(mini_df) > 0) & (len(mini_df) < 25):
             data_point = list(mini_df.COMMUNITY_NAME.unique())
             x_val = comms[comms['COMMUNITY_NAME'].isin(data_point)].centroid.x.mean()
             y_val = comms[comms['COMMUNITY_NAME'].isin(data_point)].centroid.y.mean()
-
-            m2 = folium.Map(location=[y_val, x_val], zoom_start=12)
-            folium.TileLayer('openstreetmap').add_to(m2)
-            folium.LayerControl().add_to(m2)
-            formatter = "function(num) {return L.Util.formatNum(num,3) + ' ° ';};"
-            MousePosition(
-                position='topright',
-                separator=' | ',
-                empty_string='NaN',
-                lng_first=True,
-                num_digits=20,
-                prefix='Coordinates:',
-                lat_formatter=formatter,
-                lng_formatter=formatter
-            ).add_to(m2)
-            for i in range(len(mini_df)):
-                folium.Marker(location=[mini_df.iloc[i]["LATITUDE"], mini_df.iloc[i]["LONGITUDE"]],
-                              popup='ADDRESS: ' + mini_df.iloc[i]['ADDRESS'] + ', CURRENT VALUE: $' + str(
-                                  mini_df.iloc[i]['VALUE_2023']),
-                              icon=folium.Icon(color='blue')
-                              ).add_to(m2)
-            return m2
+            map_center = [y_val, x_val]
+            map_zoom = 12  # Zoom when specific data points are selected
         else:
-            m2 = folium.Map(location=[51.049999, -114.066666], zoom_start=10)
-            folium.TileLayer('CartoDB positron', name="Light Map").add_to(m2)
-            folium.LayerControl().add_to(m2)
-            formatter = "function(num) {return L.Util.formatNum(num,3) + ' ° ';};"
-            MousePosition(
-                position='topright',
-                separator=' | ',
-                empty_string='NaN',
-                lng_first=True,
-                num_digits=20,
-                prefix='Coordinates:',
-                lat_formatter=formatter,
-                lng_formatter=formatter
-            ).add_to(m2)
-            return m2
+            map_center = st.session_state['map_center']
+            map_zoom = st.session_state['map_zoom']
+
+        m2 = folium.Map(location=map_center, zoom_start=map_zoom)
+        # m2 = folium.Map(location=[y_val, x_val], zoom_start=12)
+        folium.TileLayer('openstreetmap').add_to(m2)
+        folium.LayerControl().add_to(m2)
+        formatter = "function(num) {return L.Util.formatNum(num,3) + ' ° ';};"
+        MousePosition(
+            position='topright',
+            separator=' | ',
+            empty_string='NaN',
+            lng_first=True,
+            num_digits=20,
+            prefix='Coordinates:',
+            lat_formatter=formatter,
+            lng_formatter=formatter
+        ).add_to(m2)
+        for i in range(len(mini_df)):
+            folium.Marker(location=[mini_df.iloc[i]["LATITUDE"], mini_df.iloc[i]["LONGITUDE"]],
+                            popup='ADDRESS: ' + mini_df.iloc[i]['ADDRESS'] + ', CURRENT VALUE: $' + str(
+                                mini_df.iloc[i]['VALUE_2023']),
+                            icon=folium.Icon(color='blue')
+                            ).add_to(m2)
+        # Rest of the map setup code...
+
+        return m2
+
+#----------------------
+
+
+    # def property_map(mini_df, sub, comms):
+    #     if (len(mini_df) > 0) & (len(mini_df) < 25):
+    #         data_point = list(mini_df.COMMUNITY_NAME.unique())
+    #         x_val = comms[comms['COMMUNITY_NAME'].isin(data_point)].centroid.x.mean()
+    #         y_val = comms[comms['COMMUNITY_NAME'].isin(data_point)].centroid.y.mean()
+
+    #         m2 = folium.Map(location=[y_val, x_val], zoom_start=12)
+    #         folium.TileLayer('openstreetmap').add_to(m2)
+    #         folium.LayerControl().add_to(m2)
+    #         formatter = "function(num) {return L.Util.formatNum(num,3) + ' ° ';};"
+    #         MousePosition(
+    #             position='topright',
+    #             separator=' | ',
+    #             empty_string='NaN',
+    #             lng_first=True,
+    #             num_digits=20,
+    #             prefix='Coordinates:',
+    #             lat_formatter=formatter,
+    #             lng_formatter=formatter
+    #         ).add_to(m2)
+    #         for i in range(len(mini_df)):
+    #             folium.Marker(location=[mini_df.iloc[i]["LATITUDE"], mini_df.iloc[i]["LONGITUDE"]],
+    #                           popup='ADDRESS: ' + mini_df.iloc[i]['ADDRESS'] + ', CURRENT VALUE: $' + str(
+    #                               mini_df.iloc[i]['VALUE_2023']),
+    #                           icon=folium.Icon(color='blue')
+    #                           ).add_to(m2)
+    #         return m2
+    #     else:
+    #         m2 = folium.Map(location=[51.049999, -114.066666], zoom_start=10)
+    #         folium.TileLayer('CartoDB positron', name="Light Map").add_to(m2)
+    #         folium.LayerControl().add_to(m2)
+    #         formatter = "function(num) {return L.Util.formatNum(num,3) + ' ° ';};"
+    #         MousePosition(
+    #             position='topright',
+    #             separator=' | ',
+    #             empty_string='NaN',
+    #             lng_first=True,
+    #             num_digits=20,
+    #             prefix='Coordinates:',
+    #             lat_formatter=formatter,
+    #             lng_formatter=formatter
+    #         ).add_to(m2)
+    #         return m2
 
 
     properties = pd.read_pickle('Calgary Property Data.pkl')
