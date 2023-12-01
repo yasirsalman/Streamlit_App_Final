@@ -88,38 +88,49 @@ This section details the key frameworks, libraries, and tools used in the develo
 
 
 
-<!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running, follow these simple steps.
+This section provides instructions on how to set up the Calgary Home Navigator project locally. Follow these simple steps to get a local copy up and running.
 
 ### Prerequisites
 
-This project uses Python and several Python libraries. Ensure Python 3.8+ is installed.
-
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Calgary-Home-Navigator.git
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-This section provides instructions on how to set up the Calgary Home Navigator project on your local machine. Follow these steps to get your development environment up and running.
-
-### Prerequisites
-
-This project requires some tools and packages to be installed beforehand. Make sure you have the following prerequisites installed:
-
+Before you begin, ensure you have the following installed:
 * Python
   ```sh
   python --version
+  ```
+* Streamlit
+  ```sh
+  pip install streamlit
+  ```
 
-Ensure you have Python 3.x installed.
+### Installation
 
-Pip
+1. Clone the Calgary Home Navigator repository:
+   ```sh
+   git clone https://github.com/yasirsalman/Streamlit_App_Final.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd Streamlit_App_Final
+   ```
+3. Install required Python packages:
+   ```sh
+   pip install -r requirements.txt
+   ```
+4. Run the Streamlit application:
+   ```sh
+   streamlit run app_v4_final.py
+   ```
+
+### Additional Setup
+
+Follow these additional steps if you need to configure or customize the application:
+
+1. Edit the configuration files located in the `config` directory to match your local environment or preferences.
+2. If using external APIs or databases, ensure you have the necessary credentials and update the relevant configuration files.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
