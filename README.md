@@ -144,7 +144,7 @@ Use this space to list resources you find helpful and would like to give credit 
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
----
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [Streamlit-badge]: https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white
