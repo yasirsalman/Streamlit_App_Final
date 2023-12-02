@@ -15,10 +15,12 @@ pip install streamlit pandas numpy matplotlib plotly geopandas folium geocoder
 ```
 Clone the repository from GitHub or download the source files to a local directory.
 
+git clone https://github.com/yasirsalman/Streamlit_App_Final.git
+
 Execution:
 To execute the application, navigate to the directory containing the source code and execute the command in the terminal:
 ```
-streamlit run app.py
+streamlit run app_v4_final.py
 ```
 The command starts the Streamlit server and opens the application in a web browser. Users can navigate through various tabs to access different functionalities of the application.
 
