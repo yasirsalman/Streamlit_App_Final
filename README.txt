@@ -22,6 +22,16 @@ streamlit run app.py
 ```
 The command starts the Streamlit server and opens the application in a web browser. Users can navigate through various tabs to access different functionalities of the application.
 
+To access the streamlit Application, navigate to this URL:
+```
+https://yyc-living-lens.streamlit.app/
+```
+
+Demo Video:
+```
+https://youtu.be/TTO-CwNzDUc
+```
+
 Notes:
 - The application requires an active internet connection for map rendering and data processing.
 - Ensure that all dependencies are properly installed to experience the full functionality of the application.
