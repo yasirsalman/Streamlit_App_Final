@@ -25,6 +25,7 @@ from pandas.api.types import (
     is_numeric_dtype,
     is_object_dtype,
 )
+from sklearn.linear_model import LinearRegression
 
 
 st.set_page_config(layout="wide")
