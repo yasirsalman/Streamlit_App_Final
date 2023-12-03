@@ -2113,7 +2113,7 @@ with tab3:
     # Generate forecasts
     forecasts = generate_forecasts(df)
     fig = create_plot(filtered_df, forecasts)
-    st.plotly_chart(fig)
+    # st.plotly_chart(fig)
 
     # fig = px.line(filtered_df, x='ROLL_YEAR', y='ASSESSED_VALUE', color='COMM_NAME',
     #               labels={'ROLL_YEAR': 'Year', 'ASSESSED_VALUE': 'Average Assessed Value', 'COMM_NAME': 'Community'},
