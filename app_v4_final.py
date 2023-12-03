@@ -2120,6 +2120,9 @@ with tab3:
         # Initialize an empty figure
         fig = go.Figure()
         filtered_df['is_forecast'] = False
+        forecast_years = [2024, 2025, 2026, 2027, 2028]
+        all_years.extend(forecast_years)
+        all_years = sorted(set(all_years))
 
         # Process each community
         for comm_name in filtered_df['COMM_NAME'].unique():
@@ -2128,9 +2131,9 @@ with tab3:
 
             # Start with a solid line for historical data
             fig.add_trace(go.Scatter(
-                x=historical_data['ROLL_YEAR'], 
-                y=historical_data['ASSESSED_VALUE'], 
-                mode='lines+markers', 
+                x=historical_data['ROLL_YEAR'],
+                y=historical_data['ASSESSED_VALUE'],
+                mode='lines+markers',
                 line=dict(dash='solid'),
                 name=comm_name
             ))
@@ -2146,9 +2149,9 @@ with tab3:
                     forecast_y = [last_historical_y] + forecast_data['ASSESSED_VALUE'].tolist()
 
                     fig.add_trace(go.Scatter(
-                        x=forecast_x, 
-                        y=forecast_y, 
-                        mode='lines+markers', 
+                        x=forecast_x,
+                        y=forecast_y,
+                        mode='lines+markers',
                         line=dict(dash='dot'),
                         showlegend=False
                     ))
