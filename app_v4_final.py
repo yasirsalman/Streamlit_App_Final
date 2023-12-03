@@ -2118,29 +2118,36 @@ with tab3:
         # Add 'is_forecast' column to the filtered_df with default value as False
         filtered_df['is_forecast'] = False
 
-        # Append the forecast data to the filtered dataframe
-        for comm_name, forecast_df in forecasts.items():
-            if comm_name in filtered_df['COMM_NAME'].unique():
-                filtered_df = pd.concat([filtered_df, forecast_df], ignore_index=True)
+        # Initialize an empty figure
+        fig = go.Figure()
 
-        # Generate the plot for historical data
-        historical_data = filtered_df[filtered_df['is_forecast'] == False]
-        fig = px.line(historical_data, x='ROLL_YEAR', y='ASSESSED_VALUE', color='COMM_NAME',
-                    labels={'ROLL_YEAR': 'Year', 'ASSESSED_VALUE': 'Average Assessed Value', 'COMM_NAME': 'Community'},
-                    title='Average Assessed Value per Community Over Years')
+        # Process each community
+        for comm_name in filtered_df['COMM_NAME'].unique():
+            # Extract historical data for the community
+            community_data = filtered_df[(filtered_df['COMM_NAME'] == comm_name) & (filtered_df['is_forecast'] == False)]
 
-        # Differentiate forecasted data with a dotted line
-        for comm_name in forecasts.keys():
-            forecast_data = filtered_df[(filtered_df['COMM_NAME'] == comm_name) & (filtered_df['is_forecast'] == True)]
-            if not forecast_data.empty:
-                fig.add_scatter(x=forecast_data['ROLL_YEAR'], y=forecast_data['ASSESSED_VALUE'], mode='lines',
-                                line=dict(dash='dot'), name=f"{comm_name} Forecast")
+            # Extract forecast data for the community if available
+            if comm_name in forecasts:
+                forecast_data = forecasts[comm_name]
+                combined_data = pd.concat([community_data, forecast_data], ignore_index=True)
+            else:
+                combined_data = community_data
+
+            # Add combined data to the plot
+            fig.add_trace(go.Scatter(x=combined_data['ROLL_YEAR'], y=combined_data['ASSESSED_VALUE'], mode='lines',
+                                    line=dict(dash='solid'), name=comm_name))
+
+            # Overlay forecast data with dotted line
+            if comm_name in forecasts:
+                fig.add_trace(go.Scatter(x=forecast_data['ROLL_YEAR'], y=forecast_data['ASSESSED_VALUE'], mode='lines',
+                                        line=dict(dash='dot'), showlegend=False))
 
         fig.update_layout(title_text="Assessed Value", title_x=0.5, width=800, height=600,
-                        xaxis=dict(tickmode='array', tickvals=sorted(filtered_df['ROLL_YEAR'].unique()), 
+                        xaxis=dict(tickmode='array', tickvals=sorted(filtered_df['ROLL_YEAR'].unique()),
                                     ticktext=[str(year) for year in sorted(filtered_df['ROLL_YEAR'].unique())]))
 
         return fig
+
 
 
     # @st.cache_data
