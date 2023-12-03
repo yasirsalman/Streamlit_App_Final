@@ -2115,28 +2115,33 @@ with tab3:
     #     return fig
 
     def create_plot(filtered_df, forecasts):
-        all_years = list(filtered_df['ROLL_YEAR'].unique())
-        forecast_years = [2024, 2025, 2026, 2027, 2028]
-        all_years.extend(forecast_years)
-        all_years = sorted(set(all_years))
+        # Add 'is_forecast' column to the filtered_df with default value as False
+        filtered_df['is_forecast'] = False
+
+        # Append the forecast data to the filtered dataframe
+        for comm_name, forecast_df in forecasts.items():
+            if comm_name in filtered_df['COMM_NAME'].unique():
+                filtered_df = pd.concat([filtered_df, forecast_df], ignore_index=True)
 
         # Generate the plot for historical data
-        fig = px.line(filtered_df[filtered_df['is_forecast'] != True], 
-                    x='ROLL_YEAR', y='ASSESSED_VALUE', color='COMM_NAME',
+        historical_data = filtered_df[filtered_df['is_forecast'] == False]
+        fig = px.line(historical_data, x='ROLL_YEAR', y='ASSESSED_VALUE', color='COMM_NAME',
                     labels={'ROLL_YEAR': 'Year', 'ASSESSED_VALUE': 'Average Assessed Value', 'COMM_NAME': 'Community'},
                     title='Average Assessed Value per Community Over Years')
 
         # Differentiate forecasted data with a dotted line
-        for comm_name, forecast_df in forecasts.items():
-            forecast_data = forecast_df[forecast_df['COMM_NAME'] == comm_name]
+        for comm_name in forecasts.keys():
+            forecast_data = filtered_df[(filtered_df['COMM_NAME'] == comm_name) & (filtered_df['is_forecast'] == True)]
             if not forecast_data.empty:
                 fig.add_scatter(x=forecast_data['ROLL_YEAR'], y=forecast_data['ASSESSED_VALUE'], mode='lines',
                                 line=dict(dash='dot'), name=f"{comm_name} Forecast")
 
         fig.update_layout(title_text="Assessed Value", title_x=0.5, width=800, height=600,
-                        xaxis=dict(tickmode='array', tickvals=all_years, ticktext=[str(year) for year in all_years]))
+                        xaxis=dict(tickmode='array', tickvals=sorted(filtered_df['ROLL_YEAR'].unique()), 
+                                    ticktext=[str(year) for year in sorted(filtered_df['ROLL_YEAR'].unique())]))
 
         return fig
+
 
     # @st.cache_data
     # def create_plot(filtered_df, forecasts):
