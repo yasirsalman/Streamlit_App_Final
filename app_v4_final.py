@@ -2365,8 +2365,7 @@ with tab4:
 
 
     def create_map(comms, comms_sub):
-        # x_map = comms.centroid.x.mean()
-        # y_map = comms.centroid.y.mean()
+
         colormap = cm.linear.YlGnBu_09.to_step(data=comms_sub['COMM_SLT'], method='quant',
                                                quantiles=[0, 0.1, 0.75, 0.9, 0.98, 1])
 
@@ -2420,9 +2419,13 @@ with tab4:
 
 
     def dataframe_with_selections(df):
+        '''
+        Returns the dataframe with the user-selected rows check-boxed
+        Adapted from github Tutorial: https://docs.streamlit.io/knowledge-base/using-streamlit/how-to-get-row-selections
+        '''
         df_with_selections = df.copy()
         df_with_selections.insert(0, "Select", False)
-        # Get dataframe row-selections from user with st.data_editor
+        # Get user row selections
         edited_df = st.data_editor(df_with_selections, hide_index=True,
                                    column_config={"Select": st.column_config.CheckboxColumn(required=True)},
                                    disabled=df.columns,
@@ -2432,9 +2435,10 @@ with tab4:
         return selected_rows.drop('Select', axis=1)
 
 
-    def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    def filter_dataframe(df):
         """
-        Adds a UI on top of a dataframe to let viewers filter columns
+        Allows users filter columns
+        Adapted from github Tutorial: https://blog.streamlit.io/auto-generate-a-dataframe-filtering-ui-in-streamlit-with-filter_dataframe/
         """
         modify = st.checkbox("Add filters")
         if not modify:
@@ -2444,18 +2448,17 @@ with tab4:
         modification_container = st.container()
 
         with modification_container:
-            to_filter_columns = st.multiselect("Filter results on", df.columns)
-            for column in to_filter_columns:
+            filter_columns = st.multiselect("Filter on", df.columns[:-2])
+            for column in filter_columns:
                 left, right = st.columns((1, 20))
-                # Treat columns with < 10 unique values as categorical
-                if is_categorical_dtype(df[column]) or df[column].nunique() < 10:
+                if is_categorical_dtype(df[column]):
                     user_cat_input = right.multiselect(f"Values for {column}", df[column].unique(),
                                                        default=list(df[column].unique()), )
                     df = df[df[column].isin(user_cat_input)]
                 elif is_numeric_dtype(df[column]):
                     _min = int(df[column].min())
                     _max = int(df[column].max())
-                    step = int((_max - _min) / 100)
+                    step = int((_max - _min) / 1000)
                     user_num_input = right.slider(f"Values for {column}", min_value=_min, max_value=_max,
                                                   value=(_min, _max), step=step, )
                     df = df[df[column].between(*user_num_input)]
@@ -2489,21 +2492,10 @@ with tab4:
         # m2 = folium.Map(location=[y_val, x_val], zoom_start=12)
         folium.TileLayer('openstreetmap').add_to(m2)
         folium.LayerControl().add_to(m2)
-        formatter = "function(num) {return L.Util.formatNum(num,3) + ' ° ';};"
-        MousePosition(
-            position='topright',
-            separator=' | ',
-            empty_string='NaN',
-            lng_first=True,
-            num_digits=20,
-            prefix='Coordinates:',
-            lat_formatter=formatter,
-            lng_formatter=formatter
-        ).add_to(m2)
         for i in range(len(mini_df)):
             folium.Marker(location=[mini_df.iloc[i]["LATITUDE"], mini_df.iloc[i]["LONGITUDE"]],
                             popup='ADDRESS: ' + mini_df.iloc[i]['ADDRESS'] + ', CURRENT VALUE: $' + str(
-                                mini_df.iloc[i]['VALUE_2023']),
+                                mini_df.iloc[i]['CURRENT_VALUE']),
                             icon=folium.Icon(color='blue')
                             ).add_to(m2)
         # Rest of the map setup code...
@@ -2588,24 +2580,26 @@ with tab4:
     with col3.container():
         st.write("")
 
-    col4, col5, col6, col7 = st.columns([1, 0.05, 1, 0.2])
+    col4, col5, col6, col7, col8 = st.columns([0.2, 1.3, 0.1, 1, 0.3])
 
     with col4.container():
+        st.write("")
+
+    with col5.container():
         st.markdown('<h4 style="color: #FFFDE7;">Select & Explore Properties</h4>', unsafe_allow_html=True)
         st.write(" \n\n")
         selection = dataframe_with_selections(filter_dataframe(property_list[['ADDRESS', 'COMMUNITY_NAME', 'VALUE_2023',
-                                                                              'VALUE_2024', 'VALUE_2025', 'VALUE_2026',
-                                                                              'LATITUDE', 'LONGITUDE']]))
-    with col5.container():
+                                                                              'LATITUDE', 'LONGITUDE']].rename(columns={'VALUE_2023':'CURRENT_VALUE'})))
+    with col6.container():
         st.write("")
 
-    with col6.container():
+    with col7.container():
         st.markdown('<h4 style="color: #FFFDE7;">Property Details</h4>', unsafe_allow_html=True)
         st.markdown(
             "Utilize the 'Select & Explore' feature to interactively choose specific locations on the Calgary map. This tool empowers you to focus on communities of interest and discover available properties tailored to your preferences.")
         st.write(" ")
-        folium_static(property_map(selection, property_list, communities), width=1000, height=400)
+        folium_static(property_map(selection, property_list, communities), width=800, height=400)
 
-    with col7.container():
+    with col8.container():
         st.write("")
 
