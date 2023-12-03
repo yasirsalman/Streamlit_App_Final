@@ -2119,6 +2119,7 @@ with tab3:
     def create_plot(filtered_df, forecasts):
         # Initialize an empty figure
         fig = go.Figure()
+        filtered_df['is_forecast'] = False
 
         # Process each community
         for comm_name in filtered_df['COMM_NAME'].unique():
