@@ -2029,6 +2029,24 @@ with tab3:
 
     df, se_df, gdf, gdf_projected = load_data()
 
+    def generate_forecasts(df):
+        forecasts = {}
+        for comm_name in df['COMM_NAME'].unique():
+            community_data = df[df['COMM_NAME'] == comm_name]
+            X = community_data['ROLL_YEAR'].values.reshape(-1, 1)
+            y = community_data['ASSESSED_VALUE'].values
+            model = LinearRegression()
+            model.fit(X, y)
+            forecast_years = np.array([[2024], [2025], [2026], [2027], [2028]])
+            predicted_values = model.predict(forecast_years)
+            forecast_df = pd.DataFrame({
+                'ROLL_YEAR': [2024, 2025, 2026, 2027, 2028],
+                'ASSESSED_VALUE': predicted_values,
+                'COMM_NAME': comm_name,
+                'is_forecast': True
+            })
+            forecasts[comm_name] = forecast_df
+        return forecasts
 
     # df = pd.read_pickle('Grouped_Data_ALL-Years.pkl')
     # se_df = pd.read_csv('merged_df_property_prices.csv')
@@ -2055,17 +2073,45 @@ with tab3:
 
     # Create the Plotly plot for the selected communities
 
-    @st.cache_data
-    def create_plot(filtered_df):
-        # Generate the plot based on filtered_df
-        fig = px.line(filtered_df, x='ROLL_YEAR', y='ASSESSED_VALUE', color='COMM_NAME',
-                labels={'ROLL_YEAR': 'Year', 'ASSESSED_VALUE': 'Average Assessed Value', 'COMM_NAME': 'Community'},
-                title='Average Assessed Value per Community Over Years')
-        fig.update_layout(title_text="Assessed Value", title_x=0.3, width=800, height=600)
+    # @st.cache_data
+    # def create_plot(filtered_df):
+    #     # Generate the plot based on filtered_df
+    #     fig = px.line(filtered_df, x='ROLL_YEAR', y='ASSESSED_VALUE', color='COMM_NAME',
+    #             labels={'ROLL_YEAR': 'Year', 'ASSESSED_VALUE': 'Average Assessed Value', 'COMM_NAME': 'Community'},
+    #             title='Average Assessed Value per Community Over Years')
+    #     fig.update_layout(title_text="Assessed Value", title_x=0.3, width=800, height=600)
 
+    #     return fig
+
+
+    @st.cache_data
+    def create_plot(filtered_df, forecasts):
+        # Append the forecast data to the filtered dataframe
+        for comm_name, forecast_df in forecasts.items():
+            if comm_name in filtered_df['COMM_NAME'].unique():
+                filtered_df = pd.concat([filtered_df, forecast_df], ignore_index=True)
+
+        # Generate the plot
+        fig = px.line(filtered_df, x='ROLL_YEAR', y='ASSESSED_VALUE', color='COMM_NAME',
+                    labels={'ROLL_YEAR': 'Year', 'ASSESSED_VALUE': 'Average Assessed Value', 'COMM_NAME': 'Community'},
+                    title='Average Assessed Value per Community Over Years')
+
+        # Differentiate forecasted data with a dotted line
+        for comm_name in forecasts.keys():
+            forecast_data = filtered_df[(filtered_df['COMM_NAME'] == comm_name) & (filtered_df['is_forecast'] == True)]
+            if not forecast_data.empty:
+                fig.add_scatter(x=forecast_data['ROLL_YEAR'], y=forecast_data['ASSESSED_VALUE'], mode='lines', 
+                                line=dict(dash='dot'), name=f"{comm_name} Forecast")
+
+        fig.update_layout(title_text="Assessed Value", title_x=0.3, width=800, height=600)
         return fig
 
-    fig = create_plot(filtered_df)
+
+    # fig = create_plot(filtered_df)
+    # Generate forecasts
+    forecasts = generate_forecasts(df)
+    fig = create_plot(filtered_df, forecasts)
+    st.plotly_chart(fig)
 
     # fig = px.line(filtered_df, x='ROLL_YEAR', y='ASSESSED_VALUE', color='COMM_NAME',
     #               labels={'ROLL_YEAR': 'Year', 'ASSESSED_VALUE': 'Average Assessed Value', 'COMM_NAME': 'Community'},
