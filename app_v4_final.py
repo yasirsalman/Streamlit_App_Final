@@ -2119,6 +2119,10 @@ with tab3:
     def create_plot(filtered_df, forecasts):
         # Add 'is_forecast' column to the filtered_df with default value as False
         filtered_df['is_forecast'] = False
+        all_years = list(filtered_df['ROLL_YEAR'].unique())
+        forecast_years = [2024, 2025, 2026, 2027, 2028]
+        all_years.extend(forecast_years)
+        all_years = sorted(set(all_years))
 
         # Initialize an empty figure
         fig = go.Figure()
@@ -2156,8 +2160,8 @@ with tab3:
             height=600,
             xaxis=dict(
                 tickmode='array',
-                tickvals=sorted(filtered_df['ROLL_YEAR'].unique()),
-                ticktext=[str(year) for year in sorted(filtered_df['ROLL_YEAR'].unique())]
+                tickvals=all_years,
+                ticktext=[str(year) for year in all_years]
             )
         )
 
