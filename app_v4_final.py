@@ -2117,46 +2117,42 @@ with tab3:
 
 
     def create_plot(filtered_df, forecasts):
-        # Initialize an empty figure
-        fig = go.Figure()
+        # Add 'is_forecast' column to the filtered_df with default value as False
         filtered_df['is_forecast'] = False
+        all_years = list(filtered_df['ROLL_YEAR'].unique())
         forecast_years = [2024, 2025, 2026, 2027, 2028]
         all_years.extend(forecast_years)
         all_years = sorted(set(all_years))
 
+        # Initialize an empty figure
+        fig = go.Figure()
+
         # Process each community
         for comm_name in filtered_df['COMM_NAME'].unique():
-            # Extract historical data for the community
+            # Extract and combine historical and forecast data for the community
             historical_data = filtered_df[(filtered_df['COMM_NAME'] == comm_name) & (filtered_df['is_forecast'] == False)]
+            forecast_data = forecasts.get(comm_name, pd.DataFrame())
+            combined_data = pd.concat([historical_data, forecast_data], ignore_index=True)
 
-            # Start with a solid line for historical data
+            # Create a custom line with different styles for historical and forecast data
             fig.add_trace(go.Scatter(
-                x=historical_data['ROLL_YEAR'],
-                y=historical_data['ASSESSED_VALUE'],
+                x=combined_data['ROLL_YEAR'],
+                y=combined_data['ASSESSED_VALUE'],
                 mode='lines+markers',
                 line=dict(dash='solid'),
                 name=comm_name
             ))
 
-            # If forecast data is available, extend the line
-            if comm_name in forecasts:
-                forecast_data = forecasts[comm_name]
-                if not forecast_data.empty:
-                    # Append forecast data with a dotted line
-                    last_historical_x = historical_data['ROLL_YEAR'].iloc[-1]
-                    last_historical_y = historical_data['ASSESSED_VALUE'].iloc[-1]
-                    forecast_x = [last_historical_x] + forecast_data['ROLL_YEAR'].tolist()
-                    forecast_y = [last_historical_y] + forecast_data['ASSESSED_VALUE'].tolist()
+            if not forecast_data.empty:
+                # Change the line style at the point where forecast data starts
+                fig.add_trace(go.Scatter(
+                    x=forecast_data['ROLL_YEAR'],
+                    y=forecast_data['ASSESSED_VALUE'],
+                    mode='lines+markers',
+                    line=dict(dash='dot'),
+                    showlegend=False
+                ))
 
-                    fig.add_trace(go.Scatter(
-                        x=forecast_x,
-                        y=forecast_y,
-                        mode='lines+markers',
-                        line=dict(dash='dot'),
-                        showlegend=False
-                    ))
-
-        # Update layout
         fig.update_layout(
             title_text="Assessed Value",
             title_x=0.5,
@@ -2164,13 +2160,12 @@ with tab3:
             height=600,
             xaxis=dict(
                 tickmode='array',
-                tickvals=sorted(set(filtered_df['ROLL_YEAR'].tolist() + forecast_years)),
-                ticktext=[str(year) for year in sorted(set(filtered_df['ROLL_YEAR'].tolist() + forecast_years))]
+                tickvals=all_years,
+                ticktext=[str(year) for year in all_years]
             )
         )
 
         return fig
-
 
 
 
