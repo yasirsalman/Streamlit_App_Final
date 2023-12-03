@@ -25,6 +25,7 @@ from pandas.api.types import (
     is_numeric_dtype,
     is_object_dtype,
 )
+
 from sklearn.linear_model import LinearRegression
 
 
@@ -2031,6 +2032,7 @@ with tab3:
     df, se_df, gdf, gdf_projected = load_data()
 
     def generate_forecasts(df):
+        from sklearn.linear_model import LinearRegression
         forecasts = {}
         for comm_name in df['COMM_NAME'].unique():
             community_data = df[df['COMM_NAME'] == comm_name]
@@ -2101,7 +2103,7 @@ with tab3:
         for comm_name in forecasts.keys():
             forecast_data = filtered_df[(filtered_df['COMM_NAME'] == comm_name) & (filtered_df['is_forecast'] == True)]
             if not forecast_data.empty:
-                fig.add_scatter(x=forecast_data['ROLL_YEAR'], y=forecast_data['ASSESSED_VALUE'], mode='lines', 
+                fig.add_scatter(x=forecast_data['ROLL_YEAR'], y=forecast_data['ASSESSED_VALUE'], mode='lines',
                                 line=dict(dash='dot'), name=f"{comm_name} Forecast")
 
         fig.update_layout(title_text="Assessed Value", title_x=0.3, width=800, height=600)
