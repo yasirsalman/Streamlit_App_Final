@@ -238,7 +238,7 @@ with tab1:
         Calculate the monthly mortgage payment for a given loan amount, interest rate, and loan term.
 
         This function computes the monthly mortgage payment incorporating a stress test by adding a 2% buffer
-        to the annual interest rate. The function also calculates the total payment over the entire loan period and 
+        to the annual interest rate. The function also calculates the total payment over the entire loan period and
         the total interest paid over this period.
 
         Parameters:
@@ -2114,6 +2114,8 @@ with tab3:
     #                     xaxis=dict(tickmode='array', tickvals=all_years, ticktext=[str(year) for year in all_years]))
     #     return fig
 
+
+
     def create_plot(filtered_df, forecasts):
         # Add 'is_forecast' column to the filtered_df with default value as False
         filtered_df['is_forecast'] = False
@@ -2123,28 +2125,41 @@ with tab3:
 
         # Process each community
         for comm_name in filtered_df['COMM_NAME'].unique():
-            # Extract historical data for the community
-            community_data = filtered_df[(filtered_df['COMM_NAME'] == comm_name) & (filtered_df['is_forecast'] == False)]
+            # Extract and combine historical and forecast data for the community
+            historical_data = filtered_df[(filtered_df['COMM_NAME'] == comm_name) & (filtered_df['is_forecast'] == False)]
+            forecast_data = forecasts.get(comm_name, pd.DataFrame())
+            combined_data = pd.concat([historical_data, forecast_data], ignore_index=True)
 
-            # Extract forecast data for the community if available
-            if comm_name in forecasts:
-                forecast_data = forecasts[comm_name]
-                combined_data = pd.concat([community_data, forecast_data], ignore_index=True)
-            else:
-                combined_data = community_data
+            # Create a custom line with different styles for historical and forecast data
+            fig.add_trace(go.Scatter(
+                x=combined_data['ROLL_YEAR'],
+                y=combined_data['ASSESSED_VALUE'],
+                mode='lines+markers',
+                line=dict(dash='solid'),
+                name=comm_name
+            ))
 
-            # Add combined data to the plot
-            fig.add_trace(go.Scatter(x=combined_data['ROLL_YEAR'], y=combined_data['ASSESSED_VALUE'], mode='lines',
-                                    line=dict(dash='solid'), name=comm_name))
+            if not forecast_data.empty:
+                # Change the line style at the point where forecast data starts
+                fig.add_trace(go.Scatter(
+                    x=forecast_data['ROLL_YEAR'],
+                    y=forecast_data['ASSESSED_VALUE'],
+                    mode='lines+markers',
+                    line=dict(dash='dot'),
+                    showlegend=False
+                ))
 
-            # Overlay forecast data with dotted line
-            if comm_name in forecasts:
-                fig.add_trace(go.Scatter(x=forecast_data['ROLL_YEAR'], y=forecast_data['ASSESSED_VALUE'], mode='lines',
-                                        line=dict(dash='dot'), showlegend=False))
-
-        fig.update_layout(title_text="Assessed Value", title_x=0.5, width=800, height=600,
-                        xaxis=dict(tickmode='array', tickvals=sorted(filtered_df['ROLL_YEAR'].unique()),
-                                    ticktext=[str(year) for year in sorted(filtered_df['ROLL_YEAR'].unique())]))
+        fig.update_layout(
+            title_text="Assessed Value",
+            title_x=0.5,
+            width=800,
+            height=600,
+            xaxis=dict(
+                tickmode='array',
+                tickvals=sorted(filtered_df['ROLL_YEAR'].unique()),
+                ticktext=[str(year) for year in sorted(filtered_df['ROLL_YEAR'].unique())]
+            )
+        )
 
         return fig
 
