@@ -2679,7 +2679,10 @@ with tab4:
         st.markdown('<h4 style="color: #FFFDE7;">Select & Explore Properties</h4>', unsafe_allow_html=True)
         st.write(" \n\n")
         selection = dataframe_with_selections(filter_dataframe(property_list[['ADDRESS', 'COMMUNITY_NAME', 'VALUE_2023',
-                                                                              'LATITUDE', 'LONGITUDE']].rename(columns={'VALUE_2023':'CURRENT_VALUE'})))
+                                                                              'VALUE_2024', 'VALUE_2025', 'VALUE_2026',
+                                                                              'LATITUDE', 'LONGITUDE']].rename(
+            columns={'VALUE_2023': 'CURRENT_VALUE', 'VALUE_2024': 'FORECAST_2024', 'VALUE_2025': 'FORECAST_2025',
+                     'VALUE_2026': 'FORECAST_2026'})))
     with col6.container():
         st.write("")
 
