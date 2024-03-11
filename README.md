@@ -121,14 +121,6 @@ Distributed under the MIT License.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- CONTACT -->
-## Contact
-
-* Adriana Gordon - aferrebus3@gatech.edu
-* Luisa Porras - lmendoza31@gatech.edu
-* Yasir Salman - ysalman6@gatech.edu
-* Yemi Dare-Ode - odareode3@gatech.edu
-
 
 Project Link: [https://github.com/yasirsalman/Streamlit_App_Final](https://github.com/yasirsalman/Streamlit_App_Final)
 
