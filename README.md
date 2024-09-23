@@ -129,8 +129,6 @@ Project Link: [https://github.com/yasirsalman/Streamlit_App_Final](https://githu
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
 * [CSE6242 Instructor and TAs](https://poloclub.github.io/#cse6242)
 * [MIT License](https://opensource.org/license/mit/)
 
