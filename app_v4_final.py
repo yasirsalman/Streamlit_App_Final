@@ -2029,6 +2029,7 @@ with tab3:
         return df, se_df, gdf, gdf_projected
 
     df, se_df, gdf, gdf_projected = load_data()
+    st.legacy_caching.clear_cache()
 
     def generate_forecasts(df):
         from sklearn.linear_model import LinearRegression
